@@ -1,0 +1,10 @@
+{
+  "processors": [
+    {
+      "processor_type": "betterdeserttemples:polished_diorite_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:diorite_processor"
+    }
+  ]
+}
