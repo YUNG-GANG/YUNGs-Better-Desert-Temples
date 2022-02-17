@@ -56,6 +56,226 @@
         "max_count": 1,
         "element_type": "yungsapi:max_count_single_element"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_3",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_4",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_1",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_1_5",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_3",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_4",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_2",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_5",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_3",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_3_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_3",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_4",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_4",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_4_5",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "name": "puzzle_big_5",
+        "location": "betterdeserttemples:puzzle_big/puzzle_big_5_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
     }
   ]
 }
