@@ -5,61 +5,6 @@
     {
       "weight": 1,
       "element": {
-        "name": "puzzle_big_0",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_0_0",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_0",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_0_1",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_0",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_0_2",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_0",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_0_3",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_0",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_0_4",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
         "name": "puzzle_big_1",
         "location": "betterdeserttemples:puzzle_big/puzzle_big_1_0",
         "processors": "betterdeserttemples:main",
@@ -150,17 +95,6 @@
       "element": {
         "name": "puzzle_big_2",
         "location": "betterdeserttemples:puzzle_big/puzzle_big_2_2",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_2",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_3",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
