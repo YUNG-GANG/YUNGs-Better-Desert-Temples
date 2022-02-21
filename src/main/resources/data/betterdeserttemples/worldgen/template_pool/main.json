@@ -14,7 +14,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:main/main_puzzle_connector",
+        "location": "betterdeserttemples:main/front_puzzle_connector",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,7 +23,16 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:main/side_puzzle_connector",
+        "location": "betterdeserttemples:main/left_puzzle_connector",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/right_puzzle_connector",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -132,6 +141,24 @@
       "weight": 1,
       "element": {
         "location": "betterdeserttemples:main/statue_corner",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/redstone_corner",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/redstone_corner_empty",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
