@@ -5,6 +5,15 @@
     },
     {
       "processor_type": "betterdeserttemples:diorite_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:sponge_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:end_stone_brick_wall_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:white_stained_glass_processor"
     }
   ]
 }

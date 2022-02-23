@@ -10,6 +10,33 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:halls/middle_end_hall_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:halls/middle_end_hall_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:halls/middle_end_hall_empty",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
     }
   ]
 }
