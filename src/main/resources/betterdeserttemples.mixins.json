@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.yungnickyoung.minecraft.betterdeserttemples.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "betterdesertemples.refmap.json",
+  "refmap": "betterdeserttemples.refmap.json",
   "mixins": [
     "accessor.BoundingBoxAccessor",
     "accessor.ChunkGeneratorAccessor",
