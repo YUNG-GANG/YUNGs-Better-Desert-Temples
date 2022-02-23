@@ -14,6 +14,9 @@
     },
     {
       "processor_type": "betterdeserttemples:white_stained_glass_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:lime_banner_processor"
     }
   ]
 }
