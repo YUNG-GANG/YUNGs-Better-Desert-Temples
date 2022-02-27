@@ -140,7 +140,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:main/statue_corner",
+        "location": "betterdeserttemples:main/bottom_left_entrance_corner",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -149,7 +149,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:main/redstone_corner",
+        "location": "betterdeserttemples:main/bottom_left_entrance_corner_front",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -158,7 +158,52 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:main/redstone_corner_empty",
+        "location": "betterdeserttemples:main/bottom_right_entrance_corner",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/bottom_right_entrance_corner_front",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/bottom_main_corner",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/bottom_main_corner_front",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/bottom_entrance_corner_side",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:main/hall_entrance_corridor",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

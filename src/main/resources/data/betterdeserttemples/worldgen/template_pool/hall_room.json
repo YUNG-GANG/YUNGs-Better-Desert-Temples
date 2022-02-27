@@ -1,0 +1,15 @@
+{
+  "name": "betterdeserttemples:hall_room",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:hall_room/hall_room_5x5_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
