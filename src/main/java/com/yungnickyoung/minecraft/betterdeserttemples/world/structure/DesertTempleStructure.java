@@ -27,7 +27,7 @@ public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
 
     @Override
     public GenerationStep.@NotNull Decoration step() {
-        return GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
+        return GenerationStep.Decoration.SURFACE_STRUCTURES;
     }
 
     public DesertTempleStructure() {
