@@ -391,6 +391,17 @@
         "max_count": 2,
         "element_type": "yungsapi:max_count_single_element"
       }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "name": "wipeout",
+        "location": "betterdeserttemples:hall_room/wipeout/wipeout_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
     }
   ]
 }
