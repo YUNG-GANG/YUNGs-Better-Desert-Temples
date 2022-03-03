@@ -17,6 +17,24 @@
     },
     {
       "processor_type": "betterdeserttemples:lime_banner_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:purpur_pillar_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:quartz_pillar_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:acacia_wood_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:infested_cracked_stone_bricks_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:bone_block_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:yellow_wool_processor"
     }
   ]
 }
