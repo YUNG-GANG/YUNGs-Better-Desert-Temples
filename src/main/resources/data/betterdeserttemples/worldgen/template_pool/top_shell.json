@@ -32,15 +32,6 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:top_center/top_shell_top_1",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
         "location": "betterdeserttemples:top_center/top_shell_top_2",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",

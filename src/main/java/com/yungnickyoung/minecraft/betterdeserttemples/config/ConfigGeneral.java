@@ -19,17 +19,17 @@ public class ConfigGeneral {
                 .comment(
                         """
                                 The minimum y-value at which the desert temple can spawn.
-                                Default: 40""".indent(1))
+                                Default: 61""".indent(1))
                 .worldRestart()
-                .define("Min Start Y", 40);
+                .define("Min Start Y", 61);
 
         startMaxY = BUILDER
                 .comment(
                         """
                                 The maximum y-value at which the desert temple can spawn.
-                                Default: 60""".indent(1))
+                                Default: 200""".indent(1))
                 .worldRestart()
-                .define("Max Start Y", 60);
+                .define("Max Start Y", 200);
 
         BUILDER.pop();
     }
