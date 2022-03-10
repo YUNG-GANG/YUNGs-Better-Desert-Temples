@@ -100,6 +100,28 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "name": "water_maze",
+        "location": "betterdeserttemples:hall_room/water_maze/water_maze_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "name": "water_maze",
+        "location": "betterdeserttemples:hall_room/water_maze/water_maze_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
+      }
     }
   ]
 }
