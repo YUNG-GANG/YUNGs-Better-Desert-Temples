@@ -5,6 +5,15 @@
     {
       "weight": 1,
       "element": {
+        "location": "betterdeserttemples:hall_room/5x5/hall_room_empty",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
         "location": "betterdeserttemples:hall_room/5x5/hall_room_5x5_1",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
@@ -113,15 +122,6 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterdeserttemples:hall_room/5x5/hall_room_5x5_20",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
         "location": "betterdeserttemples:hall_room/5x5/hall_room_5x5_22",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
@@ -203,10 +203,12 @@
     {
       "weight": 1,
       "element": {
+        "name": "desert_well_hall_room",
         "location": "betterdeserttemples:hall_room/5x5/hall_room_5x5_31",
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 1,
+        "element_type": "yungsapi:max_count_single_element"
       }
     },
     {
