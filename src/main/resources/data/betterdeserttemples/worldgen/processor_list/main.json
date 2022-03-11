@@ -35,6 +35,21 @@
     },
     {
       "processor_type": "betterdeserttemples:yellow_wool_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:yellow_concrete_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:blue_concrete_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:gravel_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:torch_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:lit_campfire_processor"
     }
   ]
 }

@@ -124,7 +124,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 6,
       "element": {
         "name": "puzzle_big_3",
         "location": "betterdeserttemples:puzzle_big/puzzle_big_3_0",
@@ -201,7 +201,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 6,
       "element": {
         "name": "puzzle_big_5",
         "location": "betterdeserttemples:puzzle_big/puzzle_big_5_0",
