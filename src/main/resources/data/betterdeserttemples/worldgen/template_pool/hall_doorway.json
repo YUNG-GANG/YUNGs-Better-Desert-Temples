@@ -122,6 +122,87 @@
         "max_count": 1,
         "element_type": "yungsapi:max_count_single_element"
       }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_2",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_3",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_4",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_5",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_6",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_7",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterdeserttemples:hall_doorway/hall_doorway_long_8",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
     }
   ]
 }
