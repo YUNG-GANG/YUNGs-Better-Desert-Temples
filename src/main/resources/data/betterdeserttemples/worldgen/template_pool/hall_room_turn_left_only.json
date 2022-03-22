@@ -1,0 +1,24 @@
+{
+  "name": "betterdeserttemples:hall_room_turn_left_only",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:hall_room/5x5/hall_room_left_turn_0",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterdeserttemples:hall_room/5x5/hall_room_left_turn_1",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
