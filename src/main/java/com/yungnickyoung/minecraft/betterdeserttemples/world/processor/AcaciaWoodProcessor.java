@@ -56,7 +56,7 @@ public class AcaciaWoodProcessor extends StructureProcessor {
             if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && levelReader.getFluidState(blockInfoGlobal.pos).is(FluidTags.WATER)) {
                 blockState = blockState.setValue(BlockStateProperties.WATERLOGGED, true);
             }
-            
+
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
         }
         return blockInfoGlobal;

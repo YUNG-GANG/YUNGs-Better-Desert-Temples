@@ -53,6 +53,9 @@
     },
     {
       "processor_type": "betterdeserttemples:waterlog_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:yellow_stained_glass_processor"
     }
   ]
 }
