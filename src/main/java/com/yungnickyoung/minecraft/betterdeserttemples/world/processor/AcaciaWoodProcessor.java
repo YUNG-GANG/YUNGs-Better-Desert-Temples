@@ -6,10 +6,13 @@ import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -48,7 +51,13 @@ public class AcaciaWoodProcessor extends StructureProcessor {
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() == Blocks.ACACIA_WOOD) {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, SELECTOR.get(random), blockInfoGlobal.nbt);
+            BlockState blockState = SELECTOR.get(random);
+
+            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && levelReader.getFluidState(blockInfoGlobal.pos).is(FluidTags.WATER)) {
+                blockState = blockState.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
+            
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
         }
         return blockInfoGlobal;
     }

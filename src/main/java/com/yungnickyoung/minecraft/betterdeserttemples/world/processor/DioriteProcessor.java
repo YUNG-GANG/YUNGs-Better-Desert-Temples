@@ -5,8 +5,11 @@ import com.yungnickyoung.minecraft.betterdeserttemples.init.BDTModProcessors;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
@@ -29,6 +32,9 @@ public class DioriteProcessor extends StructureProcessor {
             .addBlock(Blocks.SANDSTONE_SLAB.defaultBlockState(), 0.25f)
             .addBlock(Blocks.SAND.defaultBlockState(), 0.25f);
 
+    private static final BlockSetSelector WHOLE_BLOCK_SELECTOR = new BlockSetSelector(Blocks.SANDSTONE.defaultBlockState())
+            .addBlock(Blocks.CUT_SANDSTONE.defaultBlockState(), 0.25f);
+
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
@@ -38,12 +44,18 @@ public class DioriteProcessor extends StructureProcessor {
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() == Blocks.DIORITE) {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, SELECTOR.get(random), blockInfoGlobal.nbt);
+            BlockState blockState = SELECTOR.get(random);
+
+            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && levelReader.getFluidState(blockInfoGlobal.pos).is(FluidTags.WATER)) {
+                blockState = blockState.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
+
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
         }
         return blockInfoGlobal;
     }
 
     protected StructureProcessorType<?> getType() {
-        return BDTModProcessors.POLISHED_DIORITE_PROCESSOR;
+        return BDTModProcessors.DIORITE_PROCESSOR;
     }
 }

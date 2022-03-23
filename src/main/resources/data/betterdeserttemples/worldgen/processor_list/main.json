@@ -50,6 +50,9 @@
     },
     {
       "processor_type": "betterdeserttemples:lit_campfire_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:waterlog_processor"
     }
   ]
 }
