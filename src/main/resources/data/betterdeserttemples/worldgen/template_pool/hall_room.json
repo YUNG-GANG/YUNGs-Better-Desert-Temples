@@ -292,7 +292,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_0",
@@ -303,7 +303,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_1",
@@ -314,7 +314,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_2",
@@ -325,7 +325,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_3",
@@ -336,7 +336,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_4",
@@ -347,7 +347,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "name": "parkour_top",
         "location": "betterdeserttemples:hall_room/parkour/parkour_top_5",
