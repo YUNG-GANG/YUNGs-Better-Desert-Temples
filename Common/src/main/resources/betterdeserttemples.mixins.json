@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.yungnickyoung.minecraft.betterdeserttemples.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "betterdeserttemples.refmap.json",
+  "mixins": [
+    "StructureTemplateMixin",
+    "accessor.BoundingBoxAccessor",
+    "accessor.StructureProcessorAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

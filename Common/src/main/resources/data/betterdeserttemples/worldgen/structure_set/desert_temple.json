@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "betterdeserttemples:desert_temple",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 92746251,
+    "spacing": 34,
+    "separation": 12,
+    "type": "minecraft:random_spread"
+  }
+}
