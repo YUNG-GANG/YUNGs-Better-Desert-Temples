@@ -29,10 +29,11 @@ import java.util.stream.Collectors;
 
 public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
     public static final List<MobSpawnSettings.SpawnerData> ENEMIES = List.of(
-            new MobSpawnSettings.SpawnerData(EntityType.HUSK, 100, 4, 15));
+            new MobSpawnSettings.SpawnerData(EntityType.HUSK, 100, 10, 15));
 
     public static final List<MobSpawnSettings.SpawnerData> CREATURES = List.of(
-            new MobSpawnSettings.SpawnerData(EntityType.CAT, 100, 4, 15));
+            new MobSpawnSettings.SpawnerData(EntityType.CAT, 100, 4, 4),
+            new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 100, 4, 4));
 
     @Override
     public GenerationStep.@NotNull Decoration step() {
@@ -50,7 +51,7 @@ public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
             int maxY = BDTConfig.general.startMaxY.get();
             int lowestSurfaceYInChunk = context.getLowestY(15, 15);
             int y = Mth.clamp(lowestSurfaceYInChunk, minY, maxY); // Clamp starting pos of bottom of pyramid
-            y -= Mth.nextInt(worldgenRandom, 4, 24); // Partially bury pyramid underground
+            y -= Mth.nextInt(worldgenRandom, 4, 36); // Partially bury pyramid underground
             BlockPos startPos = new BlockPos(context.chunkPos().getMiddleBlockX(), y, context.chunkPos().getMiddleBlockZ());
 
             // Only generate if location is valid
