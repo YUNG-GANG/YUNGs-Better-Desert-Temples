@@ -22,5 +22,6 @@ public class ConfigModuleFabric {
     private static void bakeConfig(BDTConfigFabric configFabric) {
         BetterDesertTemplesCommon.CONFIG.general.startMinY = configFabric.general.startMinY;
         BetterDesertTemplesCommon.CONFIG.general.startMaxY = configFabric.general.startMaxY;
+        BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids = configFabric.general.disableVanillaPyramids;
     }
 }

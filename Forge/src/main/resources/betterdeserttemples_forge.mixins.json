@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterdeserttemples.refmap.json",
   "mixins": [
+    "DisableVanillaPyramidsMixinForge"
   ],
   "injectors": {
     "defaultRequire": 1

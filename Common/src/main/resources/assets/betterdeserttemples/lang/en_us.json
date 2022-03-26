@@ -3,5 +3,7 @@
   "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMinY": "Desert Temple Min Start Y",
   "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMinY.@Tooltip": "The minimum y-value at which the desert temple can spawn.",
   "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMaxY": "Desert Temple Max Start Y",
-  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMaxY.@Tooltip": "The maximum y-value at which the desert temple can spawn."
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMaxY.@Tooltip": "The maximum y-value at which the desert temple can spawn.",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.disableVanillaPyramids": "Disable Vanilla Pyramids",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.disableVanillaPyramids.@Tooltip": "Whether or not vanilla desert pyramids should be disabled."
 }

@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class ConfigGeneralForge {
     public final ForgeConfigSpec.ConfigValue<Integer> startMinY;
     public final ForgeConfigSpec.ConfigValue<Integer> startMaxY;
+    public final ForgeConfigSpec.ConfigValue<Boolean> disableVanillaPyramids;
 
     public ConfigGeneralForge(final ForgeConfigSpec.Builder BUILDER) {
         BUILDER
@@ -30,6 +31,14 @@ public class ConfigGeneralForge {
                                 Default: 200""".indent(1))
                 .worldRestart()
                 .define("Max Start Y", 200);
+
+        disableVanillaPyramids = BUILDER
+                .comment(
+                        """
+                                Whether or not vanilla desert pyramids should be disabled.
+                                Default: true""".indent(1))
+                .worldRestart()
+                .define("Disable Vanilla Pyramids", true);
 
         BUILDER.pop();
     }
