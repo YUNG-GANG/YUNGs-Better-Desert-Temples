@@ -60,14 +60,14 @@ public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
         boolean isOceanNear = context.chunkGenerator()
                 .getBiomeSource()
                 .findBiomeHorizontal(startPos.getX(), startPos.getY(), startPos.getZ(),
-                        80, 8,
+                        80, 2,
                         biomeHolder -> biomeHolder.is(BiomeTags.IS_OCEAN),
                         random, true,
                         context.chunkGenerator().climateSampler()) != null;
         boolean isRiverNear = context.chunkGenerator()
                 .getBiomeSource()
                 .findBiomeHorizontal(startPos.getX(), startPos.getY(), startPos.getZ(),
-                        80, 8,
+                        80, 2,
                         biomeHolder -> biomeHolder.is(BiomeTags.IS_RIVER),
                         random, true,
                         context.chunkGenerator().climateSampler()) != null;
