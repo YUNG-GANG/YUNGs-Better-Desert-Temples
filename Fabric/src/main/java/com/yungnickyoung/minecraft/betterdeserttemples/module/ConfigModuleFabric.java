@@ -8,10 +8,12 @@ import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.world.InteractionResult;
 
 public class ConfigModuleFabric {
+
     public static void init() {
         AutoConfig.register(BDTConfigFabric.class, Toml4jConfigSerializer::new);
         AutoConfig.getConfigHolder(BDTConfigFabric.class).registerSaveListener(ConfigModuleFabric::bakeConfig);
         AutoConfig.getConfigHolder(BDTConfigFabric.class).registerLoadListener(ConfigModuleFabric::bakeConfig);
+        bakeConfig(AutoConfig.getConfigHolder(BDTConfigFabric.class).get());
     }
 
     private static InteractionResult bakeConfig(ConfigHolder<BDTConfigFabric> configHolder, BDTConfigFabric configFabric) {
@@ -23,5 +25,6 @@ public class ConfigModuleFabric {
         BetterDesertTemplesCommon.CONFIG.general.startMinY = configFabric.general.startMinY;
         BetterDesertTemplesCommon.CONFIG.general.startMaxY = configFabric.general.startMaxY;
         BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids = configFabric.general.disableVanillaPyramids;
+        BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue = configFabric.general.applyMiningFatigue;
     }
 }

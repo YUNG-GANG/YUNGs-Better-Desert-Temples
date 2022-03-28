@@ -11,4 +11,7 @@ public class ConfigGeneralFabric {
 
     @ConfigEntry.Gui.Tooltip
     public boolean disableVanillaPyramids = true;
+
+    @ConfigEntry.Gui.Tooltip(count = 2)
+    public boolean applyMiningFatigue = true;
 }

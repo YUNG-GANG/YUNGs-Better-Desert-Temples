@@ -31,5 +31,6 @@ public class ConfigModuleForge {
         BetterDesertTemplesCommon.CONFIG.general.startMinY = BDTConfigForge.general.startMinY.get();
         BetterDesertTemplesCommon.CONFIG.general.startMaxY = BDTConfigForge.general.startMaxY.get();
         BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids = BDTConfigForge.general.disableVanillaPyramids.get();
+        BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue = BDTConfigForge.general.applyMiningFatigue.get();
     }
 }

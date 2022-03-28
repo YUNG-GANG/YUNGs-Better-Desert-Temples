@@ -6,6 +6,7 @@
   "refmap": "betterdeserttemples.refmap.json",
   "mixins": [
     "LocateVanillaPyramidCommandMixin",
+    "ServerPlayerTickMixin",
     "StructureTemplateMixin",
     "accessor.BoundingBoxAccessor",
     "accessor.StructureProcessorAccessor"

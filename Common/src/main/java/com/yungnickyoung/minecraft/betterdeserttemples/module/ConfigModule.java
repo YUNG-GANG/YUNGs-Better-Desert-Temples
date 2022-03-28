@@ -7,5 +7,6 @@ public class ConfigModule {
         public int startMinY = 61;
         public int startMaxY = 200;
         public boolean disableVanillaPyramids = true;
+        public boolean applyMiningFatigue = true;
     }
 }
