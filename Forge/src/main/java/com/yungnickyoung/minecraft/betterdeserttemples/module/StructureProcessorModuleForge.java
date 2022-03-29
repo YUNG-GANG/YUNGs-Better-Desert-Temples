@@ -20,6 +20,7 @@ public class StructureProcessorModuleForge {
             register("end_stone_brick_wall_processor", StructureProcessorModule.END_STONE_BRICK_WALL_PROCESSOR);
             register("white_stained_glass_processor", StructureProcessorModule.WHITE_STAINED_GLASS_PROCESSOR);
             register("lime_banner_processor", StructureProcessorModule.LIME_BANNER_PROCESSOR);
+            register("red_banner_processor", StructureProcessorModule.RED_BANNER_PROCESSOR);
             register("purpur_pillar_processor", StructureProcessorModule.PURPUR_PILLAR_PROCESSOR);
             register("quartz_pillar_processor", StructureProcessorModule.QUARTZ_PILLAR_PROCESSOR);
             register("acacia_wood_processor", StructureProcessorModule.ACACIA_WOOD_PROCESSOR);

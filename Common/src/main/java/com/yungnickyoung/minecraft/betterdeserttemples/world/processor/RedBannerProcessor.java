@@ -27,9 +27,9 @@ import java.util.Random;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class LimeBannerProcessor extends StructureProcessor {
-    public static final LimeBannerProcessor INSTANCE = new LimeBannerProcessor();
-    public static final Codec<LimeBannerProcessor> CODEC = Codec.unit(() -> INSTANCE);
+public class RedBannerProcessor extends StructureProcessor {
+    public static final RedBannerProcessor INSTANCE = new RedBannerProcessor();
+    public static final Codec<RedBannerProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     public static final Banner ANKH_BANNER_0 = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
@@ -120,6 +120,25 @@ public class LimeBannerProcessor extends StructureProcessor {
             .pattern("flo", 15)
             .build();
 
+    public static final Banner PYRAMID_BANNER = new Banner.Builder()
+            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .pattern("bri", 0)
+            .pattern("bri", 4)
+            .pattern("ld", 3)
+            .pattern("rud", 3)
+            .pattern("tr", 4)
+            .build();
+
+    public static final Banner SPHINX_BANNER = new Banner.Builder()
+            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .pattern("hh", 4)
+            .pattern("tl", 3)
+            .pattern("cbo", 3)
+            .pattern("moj", 4)
+            .pattern("tts", 3)
+            .pattern("hhb", 1)
+            .build();
+
     public static final List<Banner> WALL_BANNERS = Lists.newArrayList(
             ANKH_BANNER_0,
             ANKH_BANNER_1,
@@ -129,7 +148,9 @@ public class LimeBannerProcessor extends StructureProcessor {
             CAT_BANNER,
             EMBLEM_BANNER_0,
             EMBLEM_BANNER_0_BLUE,
-            EMBLEM_BANNER_1
+            EMBLEM_BANNER_1,
+            PYRAMID_BANNER,
+            SPHINX_BANNER
     );
 
     @Override
@@ -141,7 +162,7 @@ public class LimeBannerProcessor extends StructureProcessor {
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state.getBlock() == Blocks.LIME_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
+            if (blockInfoGlobal.state.getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
                 Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
                 Direction facing = blockInfoGlobal.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
