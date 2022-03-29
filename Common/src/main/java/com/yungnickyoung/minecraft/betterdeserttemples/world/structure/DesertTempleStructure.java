@@ -57,24 +57,17 @@ public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
     private static boolean checkLocation(PieceGeneratorSupplier.Context<YungJigsawConfig> context, BlockPos startPos, Random random) {
         boolean isVillageNear = context.chunkGenerator()
                 .hasFeatureChunkInRange(BuiltinStructureSets.VILLAGES, context.seed(), startPos.getX() >> 4, startPos.getZ() >> 4, 10);
-        boolean isOceanNear = context.chunkGenerator()
+        boolean isOceanOrRiverNear = context.chunkGenerator()
                 .getBiomeSource()
                 .findBiomeHorizontal(startPos.getX(), startPos.getY(), startPos.getZ(),
                         80, 2,
-                        biomeHolder -> biomeHolder.is(BiomeTags.IS_OCEAN),
-                        random, true,
-                        context.chunkGenerator().climateSampler()) != null;
-        boolean isRiverNear = context.chunkGenerator()
-                .getBiomeSource()
-                .findBiomeHorizontal(startPos.getX(), startPos.getY(), startPos.getZ(),
-                        80, 2,
-                        biomeHolder -> biomeHolder.is(BiomeTags.IS_RIVER),
+                        biomeHolder -> biomeHolder.is(BiomeTags.IS_OCEAN) || biomeHolder.is(BiomeTags.IS_OCEAN),
                         random, true,
                         context.chunkGenerator().climateSampler()) != null;
         boolean isBiomeValid = context.validBiome().test(context.chunkGenerator().getNoiseBiome(
                         QuartPos.fromBlock(startPos.getX()),
                         QuartPos.fromBlock(startPos.getY()),
                         QuartPos.fromBlock(startPos.getZ())));
-        return !isVillageNear && !isOceanNear && !isRiverNear && isBiomeValid;
+        return !isVillageNear && !isOceanOrRiverNear && isBiomeValid;
     }
 }
