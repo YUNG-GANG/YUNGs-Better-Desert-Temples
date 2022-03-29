@@ -37,6 +37,7 @@ public class BoneBlockProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() == Blocks.BONE_BLOCK) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.SKELETON)
+                    .requiredPlayerRange(32)
                     .build();
             spawnerData.nextSpawnData.getEntityToSpawn().put("HandItems", Util.make(new ListTag(), (handItemsTag) -> {
             }));

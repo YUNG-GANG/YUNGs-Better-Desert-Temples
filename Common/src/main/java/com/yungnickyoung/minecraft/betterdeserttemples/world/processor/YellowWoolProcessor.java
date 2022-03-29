@@ -37,6 +37,8 @@ public class YellowWoolProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() == Blocks.YELLOW_WOOL) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.HUSK)
+                    .maxNearbyEntities(8)
+                    .requiredPlayerRange(24)
                     .build();
             spawnerData.nextSpawnData.getEntityToSpawn().put("HandItems", Util.make(new ListTag(), (handItemsTag) -> {
                 handItemsTag.add(Util.make(new CompoundTag(), (handItem1Tag) -> {

@@ -35,6 +35,7 @@ public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() == Blocks.INFESTED_CRACKED_STONE_BRICKS) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.SILVERFISH)
+                    .requiredPlayerRange(24)
                     .build();
             CompoundTag nbt = spawnerData.save();
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);

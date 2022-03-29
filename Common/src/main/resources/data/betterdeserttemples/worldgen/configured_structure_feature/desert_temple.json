@@ -14,7 +14,7 @@
           "type": "minecraft:husk",
           "weight": 100,
           "minCount": 10,
-          "maxCount": 15
+          "maxCount": 32
         }
       ]
     },

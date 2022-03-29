@@ -35,6 +35,8 @@ public class GravelProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() == Blocks.GRAVEL) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.HUSK)
+                    .maxNearbyEntities(8)
+                    .requiredPlayerRange(24)
                     .build();
             CompoundTag nbt = spawnerData.save();
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);
