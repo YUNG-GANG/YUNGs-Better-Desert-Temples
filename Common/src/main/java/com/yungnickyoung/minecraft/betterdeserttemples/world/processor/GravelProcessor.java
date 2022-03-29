@@ -4,13 +4,10 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -18,7 +15,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Optional;
 
 /**
  * Replaces gravel spawners with husk spawners.
@@ -39,9 +35,6 @@ public class GravelProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() == Blocks.GRAVEL) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.HUSK)
-                    .spawnPotentials(SimpleWeightedRandomList.single(new SpawnData(
-                            Util.make(new CompoundTag(), (compoundTag) -> compoundTag.putString("id", "minecraft:husk")),
-                            Optional.empty())))
                     .build();
             CompoundTag nbt = spawnerData.save();
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);
