@@ -14,14 +14,13 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructureSets;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.Random;
 
 public class DesertTempleStructure extends StructureFeature<YungJigsawConfig> {
     @Override
-    public GenerationStep.@NotNull Decoration step() {
+    public GenerationStep.Decoration step() {
         return GenerationStep.Decoration.SURFACE_STRUCTURES;
     }
 

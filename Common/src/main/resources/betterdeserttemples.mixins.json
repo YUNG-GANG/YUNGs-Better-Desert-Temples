@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterdeserttemples.refmap.json",
   "mixins": [
+    "PharaohKilledMixin",
     "LocateVanillaPyramidCommandMixin",
     "ServerPlayerTickMixin",
     "StructureTemplateMixin",
