@@ -4,6 +4,8 @@ import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon
 import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +18,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
@@ -43,7 +48,7 @@ public abstract class PharaohKilledMixin extends Entity {
 
     @Inject(method = "die", at = @At("HEAD"))
     private void die(DamageSource damageSource, CallbackInfo info) {
-        if (isHusk(this) && level instanceof ServerLevel) {
+        if (level instanceof ServerLevel && isPharaoh(this)) {
             ResourceKey<ConfiguredStructureFeature<?, ?>> templeKey = ResourceKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, templeResourceLocation);
             StructureStart structureStart = ((ServerLevel) this.level).structureFeatureManager().getStructureWithPieceAt(this.blockPosition(), templeKey);
             if (structureStart.isValid()) {
@@ -66,7 +71,39 @@ public abstract class PharaohKilledMixin extends Entity {
         }
     }
 
-    private boolean isHusk(Object object) {
-        return object instanceof Husk;
+    private boolean isPharaoh(Object object) {
+        if (!(object instanceof Husk)) {
+            return false;
+        }
+
+        Mob mob = (Mob) object;
+
+        for (ItemStack armorItem : mob.getArmorSlots()) {
+            if (armorItem.is(Items.PLAYER_HEAD)) {
+                if (!armorItem.hasTag()) continue;
+                CompoundTag compoundTag = armorItem.getTag();
+
+                if (compoundTag.contains("SkullOwner", 10)) {
+                    CompoundTag skullOwner = compoundTag.getCompound("SkullOwner");
+
+                    if (skullOwner.contains("Properties", 10)) {
+                        CompoundTag properties = skullOwner.getCompound("Properties");
+
+                        if (properties.contains("textures", 9)) {
+                            ListTag textures = properties.getList("textures", 10);
+                            if (textures.size() == 1) {
+                                CompoundTag texture1 = (CompoundTag) textures.get(0);
+
+                                if (texture1.getString("Value").equals("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTM1MGMwNDk5YTY4YmNkOWM3NWIyNWMxOTIzMTQzOWIxMDhkMDI3NTlmNDM1ZTMzZTRhZWU5ZWQxZGQyNDFhMiJ9fX0=")) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
