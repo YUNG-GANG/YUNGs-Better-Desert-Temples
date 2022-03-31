@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.mixin;
 
 import com.mojang.authlib.GameProfile;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
-import com.yungnickyoung.minecraft.betterdeserttemples.world.TempleStateManager;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -25,6 +25,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Applies/removes mining fatigue from players in temples, based on if the temple has been "cleared",
+ * i.e. pharaoh has been killed.
+ */
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerTickMixin extends Player {
     private static final ResourceLocation templeResourceLocation = new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, "desert_temple");
@@ -36,12 +40,15 @@ public abstract class ServerPlayerTickMixin extends Player {
     @Shadow
     public ServerGamePacketListenerImpl connection;
 
+    @Shadow
+    public abstract ServerLevel getLevel();
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void injectMethod(CallbackInfo info) {
         if (this.tickCount % 20 == 0) {
             BlockPos blockpos = this.blockPosition();
             ResourceKey<ConfiguredStructureFeature<?, ?>> templeKey = ResourceKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, templeResourceLocation);
-            StructureStart templeStart = ((ServerLevel) this.level).structureFeatureManager().getStructureWithPieceAt(blockpos, templeKey);
+            StructureStart templeStart = this.getLevel().structureFeatureManager().getStructureWithPieceAt(blockpos, templeKey);
 
             // Do not apply mining fatigue if player is not in temple or config option is disabled
             boolean isInTemple = this.level instanceof ServerLevel
@@ -50,7 +57,7 @@ public abstract class ServerPlayerTickMixin extends Player {
             if (!isInTemple || !BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
 
             // Do not apply mining fatigue if temple has been cleared
-            boolean isTempleCleared = TempleStateManager.isTempleCleared(templeStart.getChunkPos().getWorldPosition());
+            boolean isTempleCleared = ((ITempleStateCacheProvider)this.getLevel()).getTempleStateCache().isTempleCleared(templeStart.getChunkPos().getWorldPosition());
             if (isTempleCleared) {
                 return;
             }

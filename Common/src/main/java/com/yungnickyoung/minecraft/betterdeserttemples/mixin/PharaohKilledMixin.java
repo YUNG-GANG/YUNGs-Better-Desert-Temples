@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.mixin;
 
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
-import com.yungnickyoung.minecraft.betterdeserttemples.world.TempleStateManager;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -27,6 +27,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
+/**
+ * Update's a temple's "cleared" status when its pharaoh mob is killed.
+ * This status update is immediately stored to file, so that the temple remains "cleared" after a server restart.
+ * For more information on this persistence, see {@link com.yungnickyoung.minecraft.betterdeserttemples.world.state.TempleStateCache}
+ * and {@link com.yungnickyoung.minecraft.betterdeserttemples.world.state.TempleStateRegion}.
+ */
 @Mixin(LivingEntity.class)
 public abstract class PharaohKilledMixin extends Entity {
     private static final ResourceLocation templeResourceLocation = new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, "desert_temple");
@@ -44,7 +50,7 @@ public abstract class PharaohKilledMixin extends Entity {
                 BlockPos originPos = structureStart.getChunkPos().getWorldPosition();
 
                 // Clear temple state
-                TempleStateManager.setTempleCleared(originPos, true);
+                ((ITempleStateCacheProvider) this.level).getTempleStateCache().setTempleCleared(originPos, true);
 
                 // Clear mining fatigue from all players in temple
                 List<ServerPlayer> players = ((ServerLevel) this.level).players();
