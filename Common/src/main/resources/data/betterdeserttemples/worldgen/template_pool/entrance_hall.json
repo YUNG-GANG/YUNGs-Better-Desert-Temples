@@ -10,24 +10,6 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterdeserttemples:main_entrance_hall/main_entrance_hall_1",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterdeserttemples:main_entrance_hall/main_entrance_hall_2",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
     }
   ]
 }
