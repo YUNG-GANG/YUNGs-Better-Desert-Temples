@@ -59,6 +59,9 @@
     },
     {
       "processor_type": "betterdeserttemples:yellow_stained_glass_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:red_wool_processor"
     }
   ]
 }

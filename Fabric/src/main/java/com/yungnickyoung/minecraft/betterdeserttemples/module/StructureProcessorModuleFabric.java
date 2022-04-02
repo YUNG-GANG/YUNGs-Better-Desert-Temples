@@ -27,6 +27,7 @@ public class StructureProcessorModuleFabric {
         register("lit_campfire_processor", StructureProcessorModule.LIT_CAMPFIRE_PROCESSOR);
         register("waterlog_processor", StructureProcessorModule.WATERLOG_PROCESSOR);
         register("yellow_stained_glass_processor", StructureProcessorModule.YELLOW_STAINED_GLASS_PROCESSOR);
+        register("red_wool_processor", StructureProcessorModule.RED_WOOL_PROCESSOR);
     }
 
     private static void register(String name, StructureProcessorType<?> processorType) {
