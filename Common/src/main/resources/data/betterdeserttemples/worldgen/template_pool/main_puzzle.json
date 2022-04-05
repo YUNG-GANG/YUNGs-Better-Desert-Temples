@@ -113,17 +113,6 @@
       }
     },
     {
-      "weight": 1,
-      "element": {
-        "name": "puzzle_big_2",
-        "location": "betterdeserttemples:puzzle_big/puzzle_big_2_5",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
       "weight": 6,
       "element": {
         "name": "puzzle_big_3",
