@@ -1,8 +1,11 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.module;
 
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.ArmorStandProcessor;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.ItemFrameProcessor;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
 public class StructureProcessorModuleFabric {
@@ -28,9 +31,11 @@ public class StructureProcessorModuleFabric {
         register("waterlog_processor", StructureProcessorModule.WATERLOG_PROCESSOR);
         register("yellow_stained_glass_processor", StructureProcessorModule.YELLOW_STAINED_GLASS_PROCESSOR);
         register("red_wool_processor", StructureProcessorModule.RED_WOOL_PROCESSOR);
+        StructureProcessorModule.ARMOR_STAND_PROCESSOR = register("armor_stand_processor", () -> ArmorStandProcessor.CODEC);
+        StructureProcessorModule.ITEM_FRAME_PROCESSOR = register("item_frame_processor", () -> ItemFrameProcessor.CODEC);
     }
 
-    private static void register(String name, StructureProcessorType<?> processorType) {
-        Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, name), processorType);
+    private static <P extends StructureProcessor> StructureProcessorType<P> register(String name, StructureProcessorType<P> processorType) {
+        return  Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, name), processorType);
     }
 }
