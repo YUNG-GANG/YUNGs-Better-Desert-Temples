@@ -21,6 +21,10 @@
                 "max": 3.0
               },
               "add": false
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Potion:\"minecraft:water\"}"
             }
           ],
           "name": "minecraft:potion"
