@@ -57,17 +57,6 @@
       }
     },
     {
-      "weight": 3,
-      "element": {
-        "name": "crushing_corridor",
-        "location": "betterdeserttemples:hall_room/crushing_corridor",
-        "processors": "betterdeserttemples:main",
-        "projection": "rigid",
-        "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
-      }
-    },
-    {
       "weight": 1,
       "element": {
         "name": "water_maze",
