@@ -140,9 +140,15 @@ public class LimeBannerProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
+            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+
             // Make sure we only operate on the placeholder banners
             if (blockInfoGlobal.state.getBlock() == Blocks.LIME_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
-                Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
+                if (random.nextFloat() > 0.1f) {
+                    return new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), null);
+                }
+
+                Banner banner = getRandomBanner(random);
                 Direction facing = blockInfoGlobal.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
                 CompoundTag newNBT = copyNBT(banner.getNbt());
