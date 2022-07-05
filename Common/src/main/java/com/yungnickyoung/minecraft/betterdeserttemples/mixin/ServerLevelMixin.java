@@ -10,8 +10,8 @@ import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.storage.WritableLevelData;
@@ -32,8 +32,8 @@ import java.util.function.Supplier;
 public abstract class ServerLevelMixin extends Level implements ITempleStateCacheProvider {
     private TempleStateCache templeStateCache;
 
-    protected ServerLevelMixin(WritableLevelData writableLevelData, ResourceKey<Level> dimension, Holder<DimensionType> dimensionTypeHolder, Supplier<ProfilerFiller> profiler, boolean isClientSide, boolean isDebug, long biomeZoomSeed) {
-        super(writableLevelData, dimension, dimensionTypeHolder, profiler, isClientSide, isDebug, biomeZoomSeed);
+    protected ServerLevelMixin(WritableLevelData $$0, ResourceKey<Level> $$1, Holder<DimensionType> $$2, Supplier<ProfilerFiller> $$3, boolean $$4, boolean $$5, long $$6, int $$7) {
+        super($$0, $$1, $$2, $$3, $$4, $$5, $$6, $$7);
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
@@ -42,9 +42,8 @@ public abstract class ServerLevelMixin extends Level implements ITempleStateCach
                                           LevelStorageSource.LevelStorageAccess levelStorageAccess,
                                           ServerLevelData serverLevelData,
                                           ResourceKey<Level> resourceKey,
-                                          Holder<DimensionType> holder,
+                                          LevelStem levelStem,
                                           ChunkProgressListener chunkProgressListener,
-                                          ChunkGenerator chunkGenerator,
                                           boolean bl,
                                           long l,
                                           List<CustomSpawner> list,

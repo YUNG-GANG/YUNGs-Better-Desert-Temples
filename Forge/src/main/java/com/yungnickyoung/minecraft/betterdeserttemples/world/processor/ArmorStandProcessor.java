@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
 
 /**
  * Gives armor stands random armor depending on the type of armor
@@ -26,7 +26,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class ArmorStandProcessor extends StructureProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-    public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
@@ -37,7 +37,7 @@ public class ArmorStandProcessor extends StructureProcessor {
                                                                StructureTemplate template) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
             ListTag armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
-            Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+            RandomSource randomSource = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Type depends on the helmet and nothing else
             String helmet;
@@ -55,25 +55,25 @@ public class ArmorStandProcessor extends StructureProcessor {
                 ListTag armorItemsList = newNBT.getList("ArmorItems", 10);
 
                 // Boots
-                String bootsString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryBoots(random)).toString();
+                String bootsString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryBoots(randomSource)).toString();
                 armorItemsList.getCompound(0).putString("id", bootsString);
                 armorItemsList.getCompound(0).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(0).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Leggings
-                String leggingsString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryLeggings(random)).toString();
+                String leggingsString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryLeggings(randomSource)).toString();
                 armorItemsList.getCompound(1).putString("id", leggingsString);
                 armorItemsList.getCompound(1).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(1).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Chestplate
-                String chestplateString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryChestplate(random)).toString();
+                String chestplateString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryChestplate(randomSource)).toString();
                 armorItemsList.getCompound(2).putString("id", chestplateString);
                 armorItemsList.getCompound(2).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(2).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Helmet
-                String helmetString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryHelmet(random)).toString();
+                String helmetString = Registry.ITEM.getKey(ArmorStandChances.get().getArmoryHelmet(randomSource)).toString();
                 armorItemsList.getCompound(3).putString("id", helmetString);
                 armorItemsList.getCompound(3).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(3).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
@@ -83,25 +83,25 @@ public class ArmorStandProcessor extends StructureProcessor {
                 ListTag armorItemsList = newNBT.getList("ArmorItems", 10);
 
                 // Boots
-                String bootsString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeBoots(random)).toString();
+                String bootsString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeBoots(randomSource)).toString();
                 armorItemsList.getCompound(0).putString("id", bootsString);
                 armorItemsList.getCompound(0).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(0).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Leggings
-                String leggingsString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeLeggings(random)).toString();
+                String leggingsString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeLeggings(randomSource)).toString();
                 armorItemsList.getCompound(1).putString("id", leggingsString);
                 armorItemsList.getCompound(1).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(1).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Chestplate
-                String chestplateString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeChestplate(random)).toString();
+                String chestplateString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeChestplate(randomSource)).toString();
                 armorItemsList.getCompound(2).putString("id", chestplateString);
                 armorItemsList.getCompound(2).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(2).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));
 
                 // Helmet
-                String helmetString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeHelmet(random)).toString();
+                String helmetString = Registry.ITEM.getKey(ArmorStandChances.get().getWardrobeHelmet(randomSource)).toString();
                 armorItemsList.getCompound(3).putString("id", helmetString);
                 armorItemsList.getCompound(3).putByte("Count", (byte) 1);
                 armorItemsList.getCompound(3).put("tag", Util.make(new CompoundTag(), compoundTag -> compoundTag.putInt("Damage", 0)));

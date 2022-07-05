@@ -1,0 +1,47 @@
+{
+  "parent": "betterdeserttemples:temple_entry",
+  "display": {
+    "icon": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "title": {
+      "translate": "Eternal Slumber"
+    },
+    "description": {
+      "translate": "Slay the Pharaoh and free the Temple from his curse"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "pharaoh_killed": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:husk",
+              "location": {
+                "structure": "betterdeserttemples:desert_temple"
+              },
+              "equipment": {
+                "head": {
+                  "nbt": "{\"SkullOwner\": {\"Properties\": {\"textures\": [{\"Value\": \"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTM1MGMwNDk5YTY4YmNkOWM3NWIyNWMxOTIzMTQzOWIxMDhkMDI3NTlmNDM1ZTMzZTRhZWU5ZWQxZGQyNDFhMiJ9fX0=\"}]}}}"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "pharaoh_killed"
+    ]
+  ]
+}

@@ -1,10 +1,9 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.ItemRandomizer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-
-import java.util.Random;
 
 /**
  * Singleton class holding ItemRandomizers for armor pieces on armor stands.
@@ -77,35 +76,35 @@ public class ArmorStandChances {
     private ItemRandomizer armoryBoots;
     private ItemRandomizer wardrobeBoots;
 
-    public Item getArmoryHelmet(Random random) {
-        return armoryHelmets.get(random);
+    public Item getArmoryHelmet(RandomSource randomSource) {
+        return armoryHelmets.get(randomSource);
     }
 
-    public Item getWardrobeHelmet(Random random) {
-         return wardrobeHelmets.get(random);
+    public Item getWardrobeHelmet(RandomSource randomSource) {
+         return wardrobeHelmets.get(randomSource);
     }
 
-    public Item getArmoryChestplate(Random random) {
-        return armoryChestplates.get(random);
+    public Item getArmoryChestplate(RandomSource randomSource) {
+        return armoryChestplates.get(randomSource);
     }
 
-    public Item getWardrobeChestplate(Random random) {
-        return wardrobeChestplates.get(random);
+    public Item getWardrobeChestplate(RandomSource randomSource) {
+        return wardrobeChestplates.get(randomSource);
     }
 
-    public Item getArmoryLeggings(Random random) {
-        return armoryLeggings.get(random);
+    public Item getArmoryLeggings(RandomSource randomSource) {
+        return armoryLeggings.get(randomSource);
     }
 
-    public Item getWardrobeLeggings(Random random) {
-        return wardrobeLeggings.get(random);
+    public Item getWardrobeLeggings(RandomSource randomSource) {
+        return wardrobeLeggings.get(randomSource);
     }
 
-    public Item getArmoryBoots(Random random) {
-        return armoryBoots.get(random);
+    public Item getArmoryBoots(RandomSource randomSource) {
+        return armoryBoots.get(randomSource);
     }
 
-    public Item getWardrobeBoots(Random random) {
-        return wardrobeBoots.get(random);
+    public Item getWardrobeBoots(RandomSource randomSource) {
+        return wardrobeBoots.get(randomSource);
     }
 }

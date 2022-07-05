@@ -9,6 +9,10 @@
     "salt": 92746251,
     "spacing": 30,
     "separation": 8,
-    "type": "minecraft:random_spread"
+    "exclusion_zone": {
+      "chunk_count": 6,
+      "other_set": "#betterdeserttemples:desert_pyramid_avoid"
+    },
+    "type": "betterdeserttemples:desert_temple"
   }
 }

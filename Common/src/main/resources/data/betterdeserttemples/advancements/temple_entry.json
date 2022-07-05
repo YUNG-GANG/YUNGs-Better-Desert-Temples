@@ -1,0 +1,30 @@
+{
+  "parent": "betterdeserttemples:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:golden_sword"
+    },
+    "title": {
+      "translate": "An Ancient Tomb"
+    },
+    "description": {
+      "translate": "Discover a Better Desert Temple"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "in_better_desert_temple": {
+      "trigger": "yungsapi:structure_location",
+      "conditions": {
+        "feature": "betterdeserttemples:desert_temple"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "in_better_desert_temple"
+    ]
+  ]
+}

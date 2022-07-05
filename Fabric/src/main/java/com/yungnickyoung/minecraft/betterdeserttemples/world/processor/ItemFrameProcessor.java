@@ -7,15 +7,14 @@ import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 /**
  * Fills item frames with a random item.
@@ -23,7 +22,7 @@ import java.util.Random;
  */
 public class ItemFrameProcessor extends StructureEntityProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
-    public static final Codec<ItemFrameProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
@@ -33,7 +32,7 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
                                                                StructureTemplate.StructureEntityInfo globalEntityInfo,
                                                                StructurePlaceSettings structurePlaceSettings) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
-            Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+            RandomSource randomSource = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Type depends on the item currently in the frame
             String item;
@@ -46,13 +45,13 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
 
             if (item.equals("\"minecraft:iron_sword\"")) {
                 // Item frame has iron sword -> should use the armory pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
+                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) {
                 // Item frame has bread -> should use the storage pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
+                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }
@@ -62,7 +61,7 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
             }
 
             // Randomize rotation
-            int randomRotation = random.nextInt(8);
+            int randomRotation = randomSource.nextInt(8);
             globalEntityInfo.nbt.putByte("ItemRotation", (byte) randomRotation);
         }
         return globalEntityInfo;

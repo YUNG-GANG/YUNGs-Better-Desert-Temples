@@ -8,6 +8,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.AbstractBannerBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Replaces lime banners with a random banner.
@@ -140,15 +140,15 @@ public class LimeBannerProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
-            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
 
             // Make sure we only operate on the placeholder banners
             if (blockInfoGlobal.state.getBlock() == Blocks.LIME_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
-                if (random.nextFloat() > 0.1f) {
+                if (randomSource.nextFloat() > 0.1f) {
                     return new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), null);
                 }
 
-                Banner banner = getRandomBanner(random);
+                Banner banner = getRandomBanner(randomSource);
                 Direction facing = blockInfoGlobal.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
                 CompoundTag newNBT = copyNBT(banner.getNbt());
@@ -159,8 +159,8 @@ public class LimeBannerProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    private Banner getRandomBanner(Random random) {
-        return WALL_BANNERS.get(random.nextInt(WALL_BANNERS.size()));
+    private Banner getRandomBanner(RandomSource randomSource) {
+        return WALL_BANNERS.get(randomSource.nextInt(WALL_BANNERS.size()));
     }
 
     private CompoundTag copyNBT(CompoundTag other) {

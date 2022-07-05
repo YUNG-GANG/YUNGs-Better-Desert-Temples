@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "fabric-1_18_2";
+    public static final String VERSION_PATH = "fabric-1_19";
 
     public static void init() {
         initCustomFiles();
@@ -189,8 +189,6 @@ public class ConfigModuleFabric {
     }
 
     private static void bakeConfig(BDTConfigFabric configFabric) {
-        BetterDesertTemplesCommon.CONFIG.general.startMinY = configFabric.general.startMinY;
-        BetterDesertTemplesCommon.CONFIG.general.startMaxY = configFabric.general.startMaxY;
         BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids = configFabric.general.disableVanillaPyramids;
         BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue = configFabric.general.applyMiningFatigue;
     }

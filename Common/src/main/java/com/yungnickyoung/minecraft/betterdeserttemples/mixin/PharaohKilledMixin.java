@@ -1,14 +1,12 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.mixin;
 
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
+import com.yungnickyoung.minecraft.betterdeserttemples.module.TagModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -23,7 +21,6 @@ import net.minecraft.world.entity.monster.Husk;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,17 +37,14 @@ import java.util.List;
  */
 @Mixin(LivingEntity.class)
 public abstract class PharaohKilledMixin extends Entity {
-    private static final ResourceLocation templeResourceLocation = new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, "desert_temple");
-
     public PharaohKilledMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
     @Inject(method = "die", at = @At("HEAD"))
     private void die(DamageSource damageSource, CallbackInfo info) {
-        if (level instanceof ServerLevel && isPharaoh(this)) {
-            ResourceKey<ConfiguredStructureFeature<?, ?>> templeKey = ResourceKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, templeResourceLocation);
-            StructureStart structureStart = ((ServerLevel) this.level).structureFeatureManager().getStructureWithPieceAt(this.blockPosition(), templeKey);
+        if (level instanceof ServerLevel serverLevel && isPharaoh(this)) {
+            StructureStart structureStart = serverLevel.structureManager().getStructureWithPieceAt(this.blockPosition(), TagModule.APPLIES_MINING_FATIGUE);
             if (structureStart.isValid()) {
                 BlockPos originPos = structureStart.getChunkPos().getWorldPosition();
 
@@ -58,10 +52,10 @@ public abstract class PharaohKilledMixin extends Entity {
                 ((ITempleStateCacheProvider) this.level).getTempleStateCache().setTempleCleared(originPos, true);
 
                 // Clear mining fatigue from all players in temple
-                List<ServerPlayer> players = ((ServerLevel) this.level).players();
+                List<ServerPlayer> players = serverLevel.players();
                 players.forEach(player -> {
-                    if (level.isLoaded(player.blockPosition()) && ((ServerLevel) level).structureFeatureManager().getStructureWithPieceAt(player.blockPosition(), templeKey).isValid()) {
-                        player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F));
+                    if (level.isLoaded(player.blockPosition()) && ((ServerLevel) level).structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
+                        player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
                         player.removeEffect(MobEffects.DIG_SLOWDOWN);
                     }
                 });

@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Replaces sponges w/ candles of random amount & color.
@@ -39,20 +39,20 @@ public class SpongeProcessor extends StructureProcessor {
                                                              StructurePlaceSettings structurePlacementData) {
         Block block = blockInfoGlobal.state.getBlock();
         if (block == Blocks.SPONGE || block == Blocks.WET_SPONGE || block == Blocks.CANDLE) {
-            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
             // Chance of spawning candle
-            if (random.nextFloat() < 0.8f) {
+            if (randomSource.nextFloat() < 0.8f) {
                 // Determine number of candles
                 int numCandles = 1;
-                float r = random.nextFloat();
+                float r = randomSource.nextFloat();
                 if (r < .1f) numCandles = 2;
                 else if (r < .15f) numCandles = 3;
                 else if (r < .2f) numCandles = 4;
 
                 // Determine lit or not
-                boolean lit = random.nextFloat() < .4f;
+                boolean lit = randomSource.nextFloat() < .4f;
 
-                BlockState newBlockState = getRandomCandle(random).defaultBlockState()
+                BlockState newBlockState = getRandomCandle(randomSource).defaultBlockState()
                         .setValue(CandleBlock.CANDLES, numCandles)
                         .setValue(CandleBlock.LIT, lit);
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, newBlockState, blockInfoGlobal.nbt);
@@ -63,8 +63,8 @@ public class SpongeProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    private static Block getRandomCandle(Random random) {
-        int i = random.nextInt(CANDLES.size());
+    private static Block getRandomCandle(RandomSource randomSource) {
+        int i = randomSource.nextInt(CANDLES.size());
         return CANDLES.get(i);
     }
 

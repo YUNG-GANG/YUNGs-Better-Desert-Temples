@@ -26,42 +26,7 @@ public class WaterlogProcessor extends StructureProcessor implements ISafeWorldM
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-//        if (blockInfoGlobal.state.hasProperty(BlockStateProperties.WATERLOGGED)) {
-//            if (!blockInfoGlobal.state.getValue(BlockStateProperties.WATERLOGGED) && !levelReader.getBlockState(blockInfoGlobal.pos).getFluidState().isEmpty()) {
-//                // Block should NOT be waterlogged, but water is there in the world, so we need to remove it
-//                setBlockStateSafe(levelReader, blockInfoGlobal.pos, Blocks.AIR.defaultBlockState());
-//
-//                // Process neighbors
-//                BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-//                for (Direction direction : Direction.values()) {
-//                    mutable.set(blockInfoGlobal.pos).move(direction);
-//
-//                    if (mutable.getY() < levelReader.getMinBuildHeight() || mutable.getY() >= levelReader.getMaxBuildHeight()) {
-//                        continue;
-//                    }
-//
-//                    if (!getFluidStateSafe(levelReader, mutable).isEmpty()) {
-//                        setBlockStateSafe(levelReader, mutable, Blocks.AIR.defaultBlockState());
-//                    }
-//                }
-//            }
-//        } else if (blockInfoGlobal.state.isAir() && !levelReader.getBlockState(blockInfoGlobal.pos).getFluidState().isEmpty()) {
-//            setBlockStateSafe(levelReader, blockInfoGlobal.pos, Blocks.AIR.defaultBlockState());
-//
-//            // Process neighbors
-//            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-//            for (Direction direction : Direction.values()) {
-//                mutable.set(blockInfoGlobal.pos).move(direction);
-//
-//                if (mutable.getY() < levelReader.getMinBuildHeight() || mutable.getY() >= levelReader.getMaxBuildHeight()) {
-//                    continue;
-//                }
-//
-//                if (!getFluidStateSafe(levelReader, mutable).isEmpty()) {
-//                    setBlockStateSafe(levelReader, mutable, Blocks.AIR.defaultBlockState());
-//                }
-//            }
-//        }
+        // NO-OP tagging processor
         return blockInfoGlobal;
     }
 

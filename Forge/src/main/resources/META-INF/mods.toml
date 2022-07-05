@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[40,)"
+loaderVersion="[41,)"
 license="LGPLv3"
 issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Desert-Temples/issues"
 
@@ -16,16 +16,16 @@ issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Desert-Temples/is
 [[dependencies.betterdeserttemples]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19,1.20)"
 
 [[dependencies.betterdeserttemples]]
     modId="forge"
     mandatory=true
-    versionRange="[40.0.8,)"
+    versionRange="[41.0.45,)"
 
 [[dependencies.betterdeserttemples]]
     modId="yungsapi"
-    versionRange="[1.18.2-Forge-2.0.7,)"
+    versionRange="[1.19-Forge-3.4.1,)"
     mandatory=true
     ordering="NONE"
     side="BOTH"

@@ -21,11 +21,11 @@ import java.nio.file.Paths;
 
 public class ConfigModuleForge {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "forge-1_18_2";
+    public static final String VERSION_PATH = "forge-1_19";
 
     public static void init() {
         initCustomFiles();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BDTConfigForge.SPEC, "betterdeserttemples-forge-1_18_2.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BDTConfigForge.SPEC, "betterdeserttemples-forge-1_19.toml");
         MinecraftForge.EVENT_BUS.addListener(ConfigModuleForge::onWorldLoad);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ConfigModuleForge::onConfigChange);
     }
@@ -196,8 +196,6 @@ public class ConfigModuleForge {
     }
 
     private static void bakeConfig() {
-        BetterDesertTemplesCommon.CONFIG.general.startMinY = BDTConfigForge.general.startMinY.get();
-        BetterDesertTemplesCommon.CONFIG.general.startMaxY = BDTConfigForge.general.startMaxY.get();
         BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids = BDTConfigForge.general.disableVanillaPyramids.get();
         BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue = BDTConfigForge.general.applyMiningFatigue.get();
     }
