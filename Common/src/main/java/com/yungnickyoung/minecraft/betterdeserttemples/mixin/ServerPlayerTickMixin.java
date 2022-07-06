@@ -1,13 +1,15 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.mixin;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.datafixers.util.Pair;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
+import com.yungnickyoung.minecraft.betterdeserttemples.module.TagModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -25,14 +27,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Optional;
+
 /**
  * Applies/removes mining fatigue from players in temples, based on if the temple has been "cleared",
  * i.e. pharaoh has been killed.
  */
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerTickMixin extends Player {
-    private static final ResourceLocation templeResourceLocation = new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, "desert_temple");
-
     public ServerPlayerTickMixin(Level level, BlockPos blockPos, float f, GameProfile gameProfile) {
         super(level, blockPos, f, gameProfile);
     }
@@ -46,21 +48,43 @@ public abstract class ServerPlayerTickMixin extends Player {
     @Inject(method = "tick", at = @At("HEAD"))
     private void injectMethod(CallbackInfo info) {
         if (this.tickCount % 20 == 0) {
-            BlockPos blockpos = this.blockPosition();
-            ResourceKey<ConfiguredStructureFeature<?, ?>> templeKey = ResourceKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, templeResourceLocation);
-            StructureStart templeStart = this.getLevel().structureFeatureManager().getStructureWithPieceAt(blockpos, templeKey);
+            if (!this.getLevel().getServer().getWorldData().worldGenSettings().generateFeatures()) return;
+            if (!BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
 
-            // Do not apply mining fatigue if player is not in temple or config option is disabled
-            boolean isInTemple = this.level instanceof ServerLevel
-                    && this.level.isLoaded(blockpos)
-                    && templeStart.isValid();
-            if (!isInTemple || !BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
+            // Here we begin to find the nearest mining fatigue structure. By default, this is just Better Desert Temples,
+            // but other mods may add their structures to the tag as well.
+            BlockPos playerPos = this.blockPosition();
+            Pair<BlockPos, Holder<ConfiguredStructureFeature<?, ?>>> nearestStructurePair;
+            Optional<HolderSet.Named<ConfiguredStructureFeature<?, ?>>> miningFatigueStructures = this.getLevel()
+                    .registryAccess()
+                    .registryOrThrow(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY)
+                    .getTag(TagModule.APPLIES_MINING_FATIGUE);
 
-            // Do not apply mining fatigue if temple has been cleared
-            boolean isTempleCleared = ((ITempleStateCacheProvider)this.getLevel()).getTempleStateCache().isTempleCleared(templeStart.getChunkPos().getWorldPosition());
-            if (isTempleCleared) {
+            // Stop if no mining fatigue structures found at all
+            if (miningFatigueStructures.isEmpty()) {
                 return;
             }
+
+            // Find nearest mining fatigue structure
+            nearestStructurePair = this.getLevel()
+                    .getChunkSource()
+                    .getGenerator()
+                    .findNearestMapFeature(this.getLevel(), miningFatigueStructures.get(), playerPos, 8, false);
+
+            // Stop if no mining fatigue structures found within search radius
+            if (nearestStructurePair == null) {
+                return;
+            }
+
+            StructureStart structureStart = this.getLevel().structureFeatureManager().getStructureWithPieceAt(playerPos, nearestStructurePair.getSecond().value());
+
+            // Do not apply mining fatigue if player is not in structure or config option is disabled
+            boolean isPlayerInMiningFatigueStructure = this.getLevel().isLoaded(playerPos) && structureStart.isValid();
+            if (!isPlayerInMiningFatigueStructure) return;
+
+            // Do not apply mining fatigue if temple has already been cleared (i.e. pharaoh killed)
+            boolean isTempleCleared = ((ITempleStateCacheProvider)this.getLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
+            if (isTempleCleared) return;
 
             // Apply mining fatigue
             if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
