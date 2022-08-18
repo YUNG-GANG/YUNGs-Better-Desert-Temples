@@ -1,0 +1,12 @@
+{
+  "text.autoconfig.betterdeserttemples-fabric-1_18.title": "YUNG's Кращі пустельні храми",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMinY": "Пустельні храми мін. Y",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMinY.@Tooltip": "Мінімальне значення Y, при якому пустельний храм може з'являтися",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMaxY": "Пустельні храми макс. Y",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.startMaxY.@Tooltip": "Максимальне значення Y, при якому пустельний храм може з'являтися",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.disableVanillaPyramids": "Заборонити стандартні піраміди",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.disableVanillaPyramids.@Tooltip": "Чи потрібно вимкнути стандартні пустельні храми.",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.applyMiningFatigue": "Застосувати втому",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.applyMiningFatigue.@Tooltip[0]": "Чи застосовувати ефект §6Втоми §fдо гравців у храмі",
+  "text.autoconfig.betterdeserttemples-fabric-1_18.option.general.applyMiningFatigue.@Tooltip[1]": "звичайно, якщо він ще не очищений."
+}
