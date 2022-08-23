@@ -6,7 +6,7 @@ import com.yungnickyoung.minecraft.betterdeserttemples.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
@@ -30,7 +30,7 @@ public class ConfigModuleForge {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ConfigModuleForge::onConfigChange);
     }
 
-    private static void onWorldLoad(WorldEvent.Load event) {
+    private static void onWorldLoad(LevelEvent.Load event) {
         bakeConfig();
     }
 
