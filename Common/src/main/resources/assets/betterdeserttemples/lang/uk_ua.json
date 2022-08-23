@@ -1,0 +1,9 @@
+{
+  "Use /locate structure betterdeserttemples:desert_temple instead!": "Використовуй /locate structure betterdeserttemples:desert_temple !",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.title": "YUNG's Кращі пустельні храми",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.option.general.disableVanillaPyramids": "Заборонити стандартні піраміди",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.option.general.disableVanillaPyramids.@Tooltip": "Чи потрібно вимкнути стандартні пустельні храми.",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.option.general.applyMiningFatigue": "Застосувати втому",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.option.general.applyMiningFatigue.@Tooltip[0]": "Чи застосовувати ефект §6Втоми §fдо гравців у храмі",
+  "text.autoconfig.betterdeserttemples-fabric-1_19.option.general.applyMiningFatigue.@Tooltip[1]": "звичайно, якщо він ще не очищений."
+}
