@@ -25,8 +25,8 @@ public class LocateVanillaPyramidCommandMixin {
     private static final SimpleCommandExceptionType OLD_PYRAMID_EXCEPTION =
         new SimpleCommandExceptionType(new TextComponent("Use /locate betterdeserttemples:desert_temple instead!"));
 
-    @Inject(method = "locate", at = @At(value = "HEAD"), cancellable = true)
-    private static void overrideLocateVanillaPyramid(CommandSourceStack cmdSource,
+    @Inject(method = "locate", at = @At(value = "HEAD"))
+    private static void betterdeserttemples_overrideLocateVanillaPyramid(CommandSourceStack cmdSource,
                                                      ResourceOrTagLocationArgument.Result<ConfiguredStructureFeature<?, ?>> result,
                                                      CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<ConfiguredStructureFeature<?, ?>>> optional = result.unwrap().left();

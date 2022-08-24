@@ -46,52 +46,39 @@ public abstract class ServerPlayerTickMixin extends Player {
     public abstract ServerLevel getLevel();
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void injectMethod(CallbackInfo info) {
+    private void betterdeserttemples_playerTick(CallbackInfo info) {
         if (this.tickCount % 20 == 0) {
             if (!this.getLevel().getServer().getWorldData().worldGenSettings().generateFeatures()) return;
             if (!BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
 
-            // Here we begin to find the nearest mining fatigue structure. By default, this is just Better Desert Temples,
-            // but other mods may add their structures to the tag as well.
             BlockPos playerPos = this.blockPosition();
-            Pair<BlockPos, Holder<ConfiguredStructureFeature<?, ?>>> nearestStructurePair;
             Optional<HolderSet.Named<ConfiguredStructureFeature<?, ?>>> miningFatigueStructures = this.getLevel()
                     .registryAccess()
                     .registryOrThrow(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY)
                     .getTag(TagModule.APPLIES_MINING_FATIGUE);
 
             // Stop if no mining fatigue structures found at all
-            if (miningFatigueStructures.isEmpty()) {
-                return;
-            }
+            if (miningFatigueStructures.isEmpty()) return;
 
-            // Find nearest mining fatigue structure
-            nearestStructurePair = this.getLevel()
-                    .getChunkSource()
-                    .getGenerator()
-                    .findNearestMapFeature(this.getLevel(), miningFatigueStructures.get(), playerPos, 8, false);
+            // Iterate mining fatigue structures to see if any are at the player's position
+            for (Holder<ConfiguredStructureFeature<?, ?>> holder : miningFatigueStructures.get()) {
+                StructureStart structureStart = this.getLevel().structureFeatureManager().getStructureAt(playerPos, holder.value());
 
-            // Stop if no mining fatigue structures found within search radius
-            if (nearestStructurePair == null) {
-                return;
-            }
+                // Do not apply mining fatigue if structure start is invalid
+                boolean isPlayerInMiningFatigueStructure = this.getLevel().isLoaded(playerPos) && structureStart.isValid();
+                if (!isPlayerInMiningFatigueStructure) continue;
 
-            StructureStart structureStart = this.getLevel().structureFeatureManager().getStructureWithPieceAt(playerPos, nearestStructurePair.getSecond().value());
+                // Do not apply mining fatigue if temple has already been cleared (i.e. pharaoh killed)
+                boolean isTempleCleared = ((ITempleStateCacheProvider)this.getLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
+                if (isTempleCleared) continue;
 
-            // Do not apply mining fatigue if player is not in structure or config option is disabled
-            boolean isPlayerInMiningFatigueStructure = this.getLevel().isLoaded(playerPos) && structureStart.isValid();
-            if (!isPlayerInMiningFatigueStructure) return;
-
-            // Do not apply mining fatigue if temple has already been cleared (i.e. pharaoh killed)
-            boolean isTempleCleared = ((ITempleStateCacheProvider)this.getLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
-            if (isTempleCleared) return;
-
-            // Apply mining fatigue
-            if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
-                if (!this.hasEffect(MobEffects.DIG_SLOWDOWN)) {
-                    this.connection.send(new ClientboundSoundPacket(SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F));
+                // Apply mining fatigue
+                if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
+                    if (!this.hasEffect(MobEffects.DIG_SLOWDOWN)) {
+                        this.connection.send(new ClientboundSoundPacket(SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F));
+                    }
+                    this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 600, 2), this);
                 }
-                this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 600, 2), this);
             }
         }
     }

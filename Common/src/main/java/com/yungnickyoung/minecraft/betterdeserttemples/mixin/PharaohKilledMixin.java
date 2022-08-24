@@ -48,68 +48,53 @@ public abstract class PharaohKilledMixin extends Entity {
     }
 
     @Inject(method = "die", at = @At("HEAD"))
-    private void die(DamageSource damageSource, CallbackInfo info) {
-        if (level instanceof ServerLevel serverLevel && isPharaoh(this)) {
-            if (!serverLevel.getServer().getWorldData().worldGenSettings().generateFeatures()) return;
+    private void betterdeserttemples_pharaohDie(DamageSource damageSource, CallbackInfo info) {
+        if (!(level instanceof ServerLevel serverLevel)) return;
+        if (!isPharaoh(this)) return;
+        if (!serverLevel.getServer().getWorldData().worldGenSettings().generateFeatures()) return;
 
-            // Here we begin to find the nearest mining fatigue structure. By default, this is just Better Desert Temples,
-            // but other mods may add their structures to the tag as well.
-            BlockPos pharaohPos = this.blockPosition();
-            Pair<BlockPos, Holder<ConfiguredStructureFeature<?, ?>>> nearestStructurePair;
-            Optional<HolderSet.Named<ConfiguredStructureFeature<?, ?>>> miningFatigueStructures = serverLevel
-                    .registryAccess()
-                    .registryOrThrow(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY)
-                    .getTag(TagModule.APPLIES_MINING_FATIGUE);
+        BlockPos pharaohPos = this.blockPosition();
+        Optional<HolderSet.Named<ConfiguredStructureFeature<?, ?>>> miningFatigueStructures = serverLevel
+                .registryAccess()
+                .registryOrThrow(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY)
+                .getTag(TagModule.APPLIES_MINING_FATIGUE);
 
-            // Stop if no mining fatigue structures found at all
-            if (miningFatigueStructures.isEmpty()) return;
+        // Stop if no mining fatigue structures found at all
+        if (miningFatigueStructures.isEmpty()) return;
 
-            // Find the nearest mining fatigue structure to pharaoh
-            nearestStructurePair = serverLevel
-                    .getChunkSource()
-                    .getGenerator()
-                    .findNearestMapFeature(serverLevel, miningFatigueStructures.get(), pharaohPos, 8, false);
+        // Iterate mining fatigue structures to see if any are at the pharaoh's position
+        for (Holder<ConfiguredStructureFeature<?, ?>> holder : miningFatigueStructures.get()) {
+            StructureStart structureStart = serverLevel.structureFeatureManager().getStructureAt(pharaohPos, holder.value());
+            if (!structureStart.isValid()) continue;
 
-            // Stop if no mining fatigue structures found within search radius
-            if (nearestStructurePair == null) return;
+            // Structure start pos for structure at pharaoh's position
+            BlockPos structureStartPos = structureStart.getChunkPos().getWorldPosition();
 
-            // Verify validity of structure start for structure pharaoh is in
-            StructureStart structureStart = serverLevel.structureFeatureManager().getStructureWithPieceAt(pharaohPos, nearestStructurePair.getSecond().value());
-            if (structureStart.isValid()) {
-                BlockPos structurePos = structureStart.getChunkPos().getWorldPosition();
+            // Clear temple state
+            ((ITempleStateCacheProvider) serverLevel).getTempleStateCache().setTempleCleared(structureStartPos, true);
 
-                // Clear temple state
-                ((ITempleStateCacheProvider) serverLevel).getTempleStateCache().setTempleCleared(structurePos, true);
+            // Clear mining fatigue from all players in temple
+            List<ServerPlayer> players = serverLevel.players();
+            players.forEach(player -> {
+                BlockPos playerPos = player.blockPosition();
 
-                // Clear mining fatigue from all players in temple
-                List<ServerPlayer> players = serverLevel.players();
-                players.forEach(player -> {
-                    BlockPos playerPos = player.blockPosition();
+                // Check if player is in mining fatigue structure
+                for (Holder<ConfiguredStructureFeature<?, ?>> holder2 : miningFatigueStructures.get()) {
+                    StructureStart playerStructureStart = serverLevel.structureFeatureManager().getStructureAt(playerPos, holder2.value());
+                    if (!playerStructureStart.isValid()) continue;
 
-                    // Get structure player is in
-                    // Find the nearest mining fatigue structure to pharaoh
-                    Pair<BlockPos, Holder<ConfiguredStructureFeature<?, ?>>> playerNearestStructurePair = serverLevel
-                            .getChunkSource()
-                            .getGenerator()
-                            .findNearestMapFeature(serverLevel, miningFatigueStructures.get(), playerPos, 8, false);
-
-                    // Stop if no mining fatigue structures found within search radius
-                    if (playerNearestStructurePair == null) return;
-
-                    // Verify validity of structure start for structure pharaoh is in
-                    StructureStart playerStructureStart = serverLevel.structureFeatureManager().getStructureWithPieceAt(playerPos, playerNearestStructurePair.getSecond().value());
-
+                    // Clear mining fatigue if the selected structure start is same as pharaoh's
                     if (serverLevel.isLoaded(player.blockPosition())
                             && playerStructureStart.isValid()
-                            && playerStructureStart.getChunkPos().getWorldPosition().equals(structurePos)
+                            && playerStructureStart.getChunkPos().getWorldPosition().equals(structureStartPos)
                     ) {
                         player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F));
                         player.removeEffect(MobEffects.DIG_SLOWDOWN);
                     }
-                });
+                }
+            });
 
-                BetterDesertTemplesCommon.LOGGER.info("CLEARED TEMPLE AT {}", structurePos);
-            }
+            BetterDesertTemplesCommon.LOGGER.info("CLEARED TEMPLE AT {}", structureStartPos);
         }
     }
 
