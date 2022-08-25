@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "minecraft:villages",
-    "minecraft:desert_pyramids"
+    {
+      "id": "minecraft:villages",
+      "required": false
+    },
+    {
+      "id": "minecraft:desert_pyramids",
+      "required": false
+    }
   ]
 }

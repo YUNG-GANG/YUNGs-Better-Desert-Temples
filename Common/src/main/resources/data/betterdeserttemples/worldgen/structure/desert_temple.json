@@ -4,7 +4,7 @@
   "step": "surface_structures",
   "start_pool": "betterdeserttemples:starts",
   "start_jigsaw_name": "betterdeserttemples:temple_anchor",
-  "min_possible_start_y": 61,
+  "min_possible_start_y": 75,
   "max_possible_start_y": 200,
   "spawn_overrides": {
     "monster": {
