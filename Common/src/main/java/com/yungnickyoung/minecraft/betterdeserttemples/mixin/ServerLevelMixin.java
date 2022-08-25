@@ -37,7 +37,7 @@ public abstract class ServerLevelMixin extends Level implements ITempleStateCach
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void attachTempleStateManager(MinecraftServer minecraftServer,
+    private void betterdeserttemples_attachTempleStateManager(MinecraftServer minecraftServer,
                                           Executor executor,
                                           LevelStorageSource.LevelStorageAccess levelStorageAccess,
                                           ServerLevelData serverLevelData,

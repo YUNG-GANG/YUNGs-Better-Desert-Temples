@@ -42,26 +42,27 @@ public abstract class PharaohKilledMixin extends Entity {
     }
 
     @Inject(method = "die", at = @At("HEAD"))
-    private void die(DamageSource damageSource, CallbackInfo info) {
-        if (level instanceof ServerLevel serverLevel && isPharaoh(this)) {
-            StructureStart structureStart = serverLevel.structureManager().getStructureWithPieceAt(this.blockPosition(), TagModule.APPLIES_MINING_FATIGUE);
-            if (structureStart.isValid()) {
-                BlockPos originPos = structureStart.getChunkPos().getWorldPosition();
+    private void betterdeserttemples_pharaohDie(DamageSource damageSource, CallbackInfo info) {
+        if (!(level instanceof ServerLevel serverLevel)) return;
+        if (!isPharaoh(this)) return;
 
-                // Clear temple state
-                ((ITempleStateCacheProvider) this.level).getTempleStateCache().setTempleCleared(originPos, true);
+        StructureStart structureStart = serverLevel.structureManager().getStructureWithPieceAt(this.blockPosition(), TagModule.APPLIES_MINING_FATIGUE);
+        if (structureStart.isValid()) {
+            BlockPos structureStartPos = structureStart.getChunkPos().getWorldPosition();
 
-                // Clear mining fatigue from all players in temple
-                List<ServerPlayer> players = serverLevel.players();
-                players.forEach(player -> {
-                    if (level.isLoaded(player.blockPosition()) && ((ServerLevel) level).structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
-                        player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
-                        player.removeEffect(MobEffects.DIG_SLOWDOWN);
-                    }
-                });
+            // Clear temple state
+            ((ITempleStateCacheProvider) this.level).getTempleStateCache().setTempleCleared(structureStartPos, true);
 
-                BetterDesertTemplesCommon.LOGGER.info("CLEARED TEMPLE AT {}", originPos);
-            }
+            // Clear mining fatigue from all players in temple
+            List<ServerPlayer> players = serverLevel.players();
+            players.forEach(player -> {
+                if (level.isLoaded(player.blockPosition()) && serverLevel.structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
+                    player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
+                    player.removeEffect(MobEffects.DIG_SLOWDOWN);
+                }
+            });
+
+            BetterDesertTemplesCommon.LOGGER.info("CLEARED TEMPLE AT {}", structureStartPos);
         }
     }
 

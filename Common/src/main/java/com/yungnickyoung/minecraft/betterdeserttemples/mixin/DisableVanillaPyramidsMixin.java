@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChunkGenerator.class)
 public class DisableVanillaPyramidsMixin {
     /**
-     * Prevents vanilla strongholds from generating.
+     * Prevents vanilla pyramids from generating.
      */
     @Inject(method = "tryGenerateStructure", at = @At(value = "HEAD"), cancellable = true)
     void betterdeserttemples_disableVanillaDesertPyramids(

@@ -41,23 +41,18 @@ public abstract class ServerPlayerTickMixin extends Player {
     public abstract ServerLevel getLevel();
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void injectMethod(CallbackInfo info) {
+    private void betterdeserttemples_playerTick(CallbackInfo info) {
         if (this.tickCount % 20 == 0) {
-            BlockPos blockpos = this.blockPosition();
-
-            StructureStart templeStart = this.getLevel().structureManager().getStructureWithPieceAt(blockpos, TagModule.APPLIES_MINING_FATIGUE);
+            BlockPos playerPos = this.blockPosition();
+            StructureStart structureStart = this.getLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
 
             // Do not apply mining fatigue if player is not in temple or config option is disabled
-            boolean isInTemple = this.level instanceof ServerLevel
-                    && this.level.isLoaded(blockpos)
-                    && templeStart.isValid();
+            boolean isInTemple = this.getLevel().isLoaded(playerPos) && structureStart.isValid();
             if (!isInTemple || !BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
 
             // Do not apply mining fatigue if temple has been cleared
-            boolean isTempleCleared = ((ITempleStateCacheProvider) this.getLevel()).getTempleStateCache().isTempleCleared(templeStart.getChunkPos().getWorldPosition());
-            if (isTempleCleared) {
-                return;
-            }
+            boolean isTempleCleared = ((ITempleStateCacheProvider) this.getLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
+            if (isTempleCleared) return;
 
             // Apply mining fatigue
             if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
