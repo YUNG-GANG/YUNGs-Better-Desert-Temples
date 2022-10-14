@@ -3,61 +3,77 @@ package com.yungnickyoung.minecraft.betterdeserttemples.module;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import com.yungnickyoung.minecraft.betterdeserttemples.services.Services;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.*;
-import net.minecraft.resources.ResourceLocation;
+import com.yungnickyoung.minecraft.yungsapi.api.autoregister.AutoRegister;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
+@AutoRegister(BetterDesertTemplesCommon.MOD_ID)
 public class StructureProcessorModule {
+    @AutoRegister("polished_diorite_processor")
     public static StructureProcessorType<PolishedDioriteProcessor> POLISHED_DIORITE_PROCESSOR = () -> PolishedDioriteProcessor.CODEC;
+
+    @AutoRegister("diorite_processor")
     public static StructureProcessorType<DioriteProcessor> DIORITE_PROCESSOR = () -> DioriteProcessor.CODEC;
+
+    @AutoRegister("sponge_processor")
     public static StructureProcessorType<SpongeProcessor> SPONGE_PROCESSOR = () -> SpongeProcessor.CODEC;
+
+    @AutoRegister("end_stone_brick_wall_processor")
     public static StructureProcessorType<EndStoneBrickWallProcessor> END_STONE_BRICK_WALL_PROCESSOR = () -> EndStoneBrickWallProcessor.CODEC;
+
+    @AutoRegister("white_stained_glass_processor")
     public static StructureProcessorType<WhiteStainedGlassProcessor> WHITE_STAINED_GLASS_PROCESSOR = () -> WhiteStainedGlassProcessor.CODEC;
+
+    @AutoRegister("lime_banner_processor")
     public static StructureProcessorType<LimeBannerProcessor> LIME_BANNER_PROCESSOR = () -> LimeBannerProcessor.CODEC;
+
+    @AutoRegister("red_banner_processor")
     public static StructureProcessorType<RedBannerProcessor> RED_BANNER_PROCESSOR = () -> RedBannerProcessor.CODEC;
+
+    @AutoRegister("purpur_pillar_processor")
     public static StructureProcessorType<PurpurPillarProcessor> PURPUR_PILLAR_PROCESSOR = () -> PurpurPillarProcessor.CODEC;
+
+    @AutoRegister("quartz_pillar_processor")
     public static StructureProcessorType<QuartzPillarProcessor> QUARTZ_PILLAR_PROCESSOR = () -> QuartzPillarProcessor.CODEC;
+
+    @AutoRegister("acacia_wood_processor")
     public static StructureProcessorType<AcaciaWoodProcessor> ACACIA_WOOD_PROCESSOR = () -> AcaciaWoodProcessor.CODEC;
+
+    @AutoRegister("infested_cracked_stone_bricks_processor")
     public static StructureProcessorType<InfestedCrackedStoneBricksProcessor> INFESTED_CRACKED_STONE_BRICKS_PROCESSOR = () -> InfestedCrackedStoneBricksProcessor.CODEC;
+
+    @AutoRegister("bone_block_processor")
     public static StructureProcessorType<BoneBlockProcessor> BONE_BLOCK_PROCESSOR = () -> BoneBlockProcessor.CODEC;
+
+    @AutoRegister("yellow_wool_processor")
     public static StructureProcessorType<YellowWoolProcessor> YELLOW_WOOL_PROCESSOR = () -> YellowWoolProcessor.CODEC;
+
+    @AutoRegister("yellow_concrete_processor")
     public static StructureProcessorType<YellowConcreteProcessor> YELLOW_CONCRETE_PROCESSOR = () -> YellowConcreteProcessor.CODEC;
+
+    @AutoRegister("blue_concrete_processor")
     public static StructureProcessorType<BlueConcreteProcessor> BLUE_CONCRETE_PROCESSOR = () -> BlueConcreteProcessor.CODEC;
+
+    @AutoRegister("gravel_processor")
     public static StructureProcessorType<GravelProcessor> GRAVEL_PROCESSOR = () -> GravelProcessor.CODEC;
+
+    @AutoRegister("torch_processor")
     public static StructureProcessorType<TorchProcessor> TORCH_PROCESSOR = () -> TorchProcessor.CODEC;
+
+    @AutoRegister("lit_campfire_processor")
     public static StructureProcessorType<LitCampfireProcessor> LIT_CAMPFIRE_PROCESSOR = () -> LitCampfireProcessor.CODEC;
+
+    @AutoRegister("waterlog_processor")
     public static StructureProcessorType<WaterlogProcessor> WATERLOG_PROCESSOR = () -> WaterlogProcessor.CODEC;
+
+    @AutoRegister("yellow_stained_glass_processor")
     public static StructureProcessorType<YellowStainedGlassProcessor> YELLOW_STAINED_GLASS_PROCESSOR = () -> YellowStainedGlassProcessor.CODEC;
+
+    @AutoRegister("red_wool_processor")
     public static StructureProcessorType<RedWoolProcessor> RED_WOOL_PROCESSOR = () -> RedWoolProcessor.CODEC;
+
+    @AutoRegister("armor_stand_processor")
     public static StructureProcessorType<?> ARMOR_STAND_PROCESSOR = () -> Services.PROCESSORS.armorStandProcessorCodec();
+
+    @AutoRegister("item_frame_processor")
     public static StructureProcessorType<?> ITEM_FRAME_PROCESSOR = () -> Services.PROCESSORS.itemFrameProcessorCodec();
-
-    public static void init() {
-        register("polished_diorite_processor", POLISHED_DIORITE_PROCESSOR);
-        register("diorite_processor", DIORITE_PROCESSOR);
-        register("sponge_processor", SPONGE_PROCESSOR);
-        register("end_stone_brick_wall_processor", END_STONE_BRICK_WALL_PROCESSOR);
-        register("white_stained_glass_processor", WHITE_STAINED_GLASS_PROCESSOR);
-        register("lime_banner_processor", LIME_BANNER_PROCESSOR);
-        register("red_banner_processor", RED_BANNER_PROCESSOR);
-        register("purpur_pillar_processor", PURPUR_PILLAR_PROCESSOR);
-        register("quartz_pillar_processor", QUARTZ_PILLAR_PROCESSOR);
-        register("acacia_wood_processor", ACACIA_WOOD_PROCESSOR);
-        register("infested_cracked_stone_bricks_processor", INFESTED_CRACKED_STONE_BRICKS_PROCESSOR);
-        register("bone_block_processor", BONE_BLOCK_PROCESSOR);
-        register("yellow_wool_processor", YELLOW_WOOL_PROCESSOR);
-        register("yellow_concrete_processor", YELLOW_CONCRETE_PROCESSOR);
-        register("blue_concrete_processor", BLUE_CONCRETE_PROCESSOR);
-        register("gravel_processor", GRAVEL_PROCESSOR);
-        register("torch_processor", TORCH_PROCESSOR);
-        register("lit_campfire_processor", LIT_CAMPFIRE_PROCESSOR);
-        register("waterlog_processor", WATERLOG_PROCESSOR);
-        register("yellow_stained_glass_processor", YELLOW_STAINED_GLASS_PROCESSOR);
-        register("red_wool_processor", RED_WOOL_PROCESSOR);
-        register("armor_stand_processor", ARMOR_STAND_PROCESSOR);
-        register("item_frame_processor", ITEM_FRAME_PROCESSOR);
-    }
-
-    private static void register(String name, StructureProcessorType<?> processorType) {
-        Services.REGISTRY.registerStructureProcessorType(new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, name), processorType);
-    }
 }

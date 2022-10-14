@@ -187,6 +187,6 @@ public class RedBannerProcessor extends StructureProcessor {
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.LIME_BANNER_PROCESSOR;
+        return StructureProcessorModule.RED_BANNER_PROCESSOR;
     }
 }

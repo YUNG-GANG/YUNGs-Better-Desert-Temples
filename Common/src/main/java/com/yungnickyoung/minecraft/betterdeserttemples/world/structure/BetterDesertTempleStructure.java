@@ -2,8 +2,8 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.structure;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.api.YungJigsawManager;
-import com.yungnickyoung.minecraft.yungsapi.module.StructureTypeModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -98,6 +98,6 @@ public class BetterDesertTempleStructure extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return StructureTypeModule.YUNG_JIGSAW;
+        return StructureTypeModule.BETTER_DESERT_TEMPLE;
     }
 }
