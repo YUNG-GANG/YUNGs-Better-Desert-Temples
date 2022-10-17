@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.player.ProfilePublicKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,9 +42,11 @@ public abstract class ServerPlayerTickMixin extends Player {
     @Shadow
     public abstract ServerLevel getLevel();
 
+    @Shadow @Final public ServerPlayerGameMode gameMode;
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void betterdeserttemples_playerTick(CallbackInfo info) {
-        if (this.tickCount % 20 == 0) {
+        if (this.gameMode.isSurvival() && this.tickCount % 20 == 0) {
             BlockPos playerPos = this.blockPosition();
             StructureStart structureStart = this.getLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
 

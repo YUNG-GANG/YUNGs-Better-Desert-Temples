@@ -79,7 +79,7 @@ public class BetterDesertTempleStructure extends Structure {
         int y = Mth.clamp(lowestSurfaceYInChunk, lowestPossibleY, highestPossibleY);
 
         // Partially bury pyramid underground
-        y -= Mth.nextInt(context.random(), 4, 36);
+        y -= Mth.nextInt(context.random(), 0, 24);
         BlockPos startPos = new BlockPos(chunkPos.getBlockX(xOffset), y, chunkPos.getBlockZ(zOffset));
 
         return YungJigsawManager.assembleJigsawStructure(
