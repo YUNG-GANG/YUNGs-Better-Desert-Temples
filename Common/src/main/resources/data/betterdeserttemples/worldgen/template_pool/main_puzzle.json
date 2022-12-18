@@ -10,7 +10,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -21,7 +21,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -32,7 +32,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -43,7 +43,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -54,7 +54,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -65,7 +65,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -76,7 +76,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -87,7 +87,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -98,7 +98,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -109,7 +109,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -120,7 +120,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -131,7 +131,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -142,7 +142,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -153,7 +153,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -164,7 +164,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -175,7 +175,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -186,7 +186,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -197,7 +197,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -208,7 +208,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -219,7 +219,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -230,7 +230,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -241,7 +241,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },    {
       "weight": 1,
@@ -251,7 +251,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -262,7 +262,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -273,7 +273,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -284,7 +284,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -295,7 +295,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -306,7 +306,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -317,7 +317,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -328,7 +328,7 @@
         "processors": "betterdeserttemples:main",
         "projection": "rigid",
         "max_count": 1,
-        "element_type": "yungsapi:max_count_single_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     }
   ]
