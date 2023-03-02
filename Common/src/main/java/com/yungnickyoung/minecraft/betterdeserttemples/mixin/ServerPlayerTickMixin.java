@@ -5,6 +5,7 @@ import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon
 import com.yungnickyoung.minecraft.betterdeserttemples.module.TagModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,10 +16,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.ProfilePublicKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,8 +34,8 @@ public abstract class ServerPlayerTickMixin extends Player {
     @Shadow
     public ServerGamePacketListenerImpl connection;
 
-    public ServerPlayerTickMixin(Level $$0, BlockPos $$1, float $$2, GameProfile $$3, @Nullable ProfilePublicKey $$4) {
-        super($$0, $$1, $$2, $$3, $$4);
+    public ServerPlayerTickMixin(Level $$0, BlockPos $$1, float $$2, GameProfile $$3) {
+        super($$0, $$1, $$2, $$3);
     }
 
     @Shadow
@@ -61,7 +60,7 @@ public abstract class ServerPlayerTickMixin extends Player {
             // Apply mining fatigue
             if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
                 if (!this.hasEffect(MobEffects.DIG_SLOWDOWN)) {
-                    this.connection.send(new ClientboundSoundPacket(SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, ((ServerLevel) level).getSeed()));
+                    this.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.ELDER_GUARDIAN_CURSE), SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, ((ServerLevel) level).getSeed()));
                 }
                 this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 600, 2), this);
             }

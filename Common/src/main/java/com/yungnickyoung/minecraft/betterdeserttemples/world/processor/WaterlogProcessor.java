@@ -2,7 +2,6 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -15,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class WaterlogProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class WaterlogProcessor extends StructureProcessor {
     public static final WaterlogProcessor INSTANCE = new WaterlogProcessor();
     public static final Codec<WaterlogProcessor> CODEC = Codec.unit(() -> INSTANCE);
 

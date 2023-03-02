@@ -21,22 +21,24 @@ import java.nio.file.Paths;
 
 public class ConfigModuleForge {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "forge-1_19";
+    public static final String VERSION_PATH = "forge-1_19_3";
 
     public static void init() {
         initCustomFiles();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BDTConfigForge.SPEC, "betterdeserttemples-forge-1_19.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BDTConfigForge.SPEC, "betterdeserttemples-forge-1_19_3.toml");
         MinecraftForge.EVENT_BUS.addListener(ConfigModuleForge::onWorldLoad);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ConfigModuleForge::onConfigChange);
     }
 
     private static void onWorldLoad(LevelEvent.Load event) {
         bakeConfig();
+        loadJSON();
     }
 
     private static void onConfigChange(ModConfigEvent event) {
         if (event.getConfig().getSpec() == BDTConfigForge.SPEC) {
             bakeConfig();
+            loadJSON();
         }
     }
 

@@ -4,7 +4,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ public class LocateVanillaPyramidCommandMixin {
 
     @Inject(method = "locateStructure", at = @At(value = "HEAD"))
     private static void betterdeserttemples_overrideLocateVanillaPyramid(CommandSourceStack cmdSource,
-                                                     ResourceOrTagLocationArgument.Result<Structure> result,
+                                                     ResourceOrTagKeyArgument.Result<Structure> result,
                                                      CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<Structure>> optional = result.unwrap().left();
         if (BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids && optional.isPresent() && optional.get().location().equals(new ResourceLocation("desert_pyramid"))) {

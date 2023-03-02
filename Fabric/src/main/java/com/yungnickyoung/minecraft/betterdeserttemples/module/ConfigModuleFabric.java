@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "fabric-1_19";
+    public static final String VERSION_PATH = "fabric-1_19_3";
 
     public static void init() {
         initCustomFiles();
@@ -31,6 +31,7 @@ public class ConfigModuleFabric {
 
     private static InteractionResult bakeConfig(ConfigHolder<BDTConfigFabric> configHolder, BDTConfigFabric configFabric) {
         bakeConfig(configFabric);
+        loadJSON();
         return InteractionResult.SUCCESS;
     }
 

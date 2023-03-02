@@ -5,13 +5,13 @@ import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -43,13 +43,13 @@ public class ItemFrameProcessor extends StructureProcessor {
 
             if (item.equals("\"minecraft:iron_sword\"")) {
                 // Item frame has iron sword -> should use the armory pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
+                String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) {
                 // Item frame has bread -> should use the storage pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
+                String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }

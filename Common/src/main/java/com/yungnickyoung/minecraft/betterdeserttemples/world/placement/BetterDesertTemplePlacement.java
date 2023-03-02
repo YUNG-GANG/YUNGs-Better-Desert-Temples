@@ -2,13 +2,15 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.placement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.yungnickyoung.minecraft.betterdeserttemples.mixin.accessor.ChunkGeneratorStructureStateAccessor;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructurePlacementTypeModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.chunk.ChunkGeneratorStructureState;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
@@ -43,18 +45,20 @@ public class BetterDesertTemplePlacement extends RandomSpreadStructurePlacement 
     }
 
     @Override
-    protected boolean isPlacementChunk(ChunkGenerator chunkGenerator, RandomState randomState, long seed, int chunkX, int chunkZ) {
+    protected boolean isPlacementChunk(ChunkGeneratorStructureState chunkGeneratorStructureState, int chunkX, int chunkZ) {
+        BiomeSource biomeSource = ((ChunkGeneratorStructureStateAccessor) chunkGeneratorStructureState).getBiomeSource();
+        RandomState randomState = chunkGeneratorStructureState.randomState();
+        long seed = chunkGeneratorStructureState.getLevelSeed();
         ChunkPos chunkPos = this.getPotentialStructureChunk(seed, chunkX, chunkZ);
         if (chunkPos.x == chunkX && chunkPos.z == chunkZ) {
             BlockPos structurePos = chunkPos.getMiddleBlockPosition(120);
-            boolean isOceanOrRiverNear = chunkGenerator
-                    .getBiomeSource()
-                    .findBiomeHorizontal(structurePos.getX(), structurePos.getY(), structurePos.getZ(),
-                            48, 2,
-                            biomeHolder -> biomeHolder.is(BiomeTags.IS_RIVER) || biomeHolder.is(BiomeTags.IS_OCEAN),
-                            randomState.oreRandom().at(structurePos), true,
-                            randomState.sampler()
-                    ) != null;
+            boolean isOceanOrRiverNear = biomeSource.findBiomeHorizontal(
+                    structurePos.getX(), structurePos.getY(), structurePos.getZ(),
+                    48, 2,
+                    biomeHolder -> biomeHolder.is(BiomeTags.IS_RIVER) || biomeHolder.is(BiomeTags.IS_OCEAN),
+                    randomState.oreRandom().at(structurePos), true,
+                    randomState.sampler()
+            ) != null;
             return !isOceanOrRiverNear;
         }
         return false;

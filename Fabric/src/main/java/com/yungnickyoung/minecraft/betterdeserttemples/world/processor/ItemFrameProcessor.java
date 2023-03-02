@@ -6,7 +6,7 @@ import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessor
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -45,13 +45,13 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
 
             if (item.equals("\"minecraft:iron_sword\"")) {
                 // Item frame has iron sword -> should use the armory pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
+                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) {
                 // Item frame has bread -> should use the storage pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
+                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
                 }

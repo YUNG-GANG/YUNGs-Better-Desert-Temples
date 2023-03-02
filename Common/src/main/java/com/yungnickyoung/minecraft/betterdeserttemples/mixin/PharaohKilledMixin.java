@@ -4,6 +4,7 @@ import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon
 import com.yungnickyoung.minecraft.betterdeserttemples.module.TagModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.state.ITempleStateCacheProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -57,7 +58,7 @@ public abstract class PharaohKilledMixin extends Entity {
             List<ServerPlayer> players = serverLevel.players();
             players.forEach(player -> {
                 if (level.isLoaded(player.blockPosition()) && serverLevel.structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
-                    player.connection.send(new ClientboundSoundPacket(SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
+                    player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BEACON_DEACTIVATE), SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
                     player.removeEffect(MobEffects.DIG_SLOWDOWN);
                 }
             });
