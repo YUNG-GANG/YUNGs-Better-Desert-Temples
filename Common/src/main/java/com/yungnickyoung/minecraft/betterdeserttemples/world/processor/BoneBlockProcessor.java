@@ -34,7 +34,7 @@ public class BoneBlockProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.BONE_BLOCK) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.BONE_BLOCK) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.SKELETON)
                     .requiredPlayerRange(32)
@@ -42,7 +42,7 @@ public class BoneBlockProcessor extends StructureProcessor {
             spawnerData.nextSpawnData.getEntityToSpawn().put("HandItems", Util.make(new ListTag(), (handItemsTag) -> {
             }));
             CompoundTag nbt = spawnerData.save();
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }
         return blockInfoGlobal;
     }

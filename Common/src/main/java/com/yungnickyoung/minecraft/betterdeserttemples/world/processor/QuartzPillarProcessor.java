@@ -32,14 +32,14 @@ public class QuartzPillarProcessor extends StructureProcessor implements ISafeWo
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.QUARTZ_PILLAR) {
-            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos.mutable();
+        if (blockInfoGlobal.state().getBlock() == Blocks.QUARTZ_PILLAR) {
+            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable();
             BlockState blockState = Blocks.SANDSTONE.defaultBlockState();
             for (int i = 0; i < 8; i++) {
                 setBlockStateSafe(levelReader, mutable, blockState);
                 mutable.move(Direction.DOWN);
             }
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), blockState, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

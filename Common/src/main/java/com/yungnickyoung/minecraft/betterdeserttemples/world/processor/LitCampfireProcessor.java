@@ -30,9 +30,9 @@ public class LitCampfireProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.CAMPFIRE && blockInfoGlobal.state.getValue(CampfireBlock.LIT)) {
-            if (structurePlacementData.getRandom(blockInfoGlobal.pos).nextFloat() > .25f) {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockInfoGlobal.state.setValue(CampfireBlock.LIT, false), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.CAMPFIRE && blockInfoGlobal.state().getValue(CampfireBlock.LIT)) {
+            if (structurePlacementData.getRandom(blockInfoGlobal.pos()).nextFloat() > .25f) {
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), blockInfoGlobal.state().setValue(CampfireBlock.LIT, false), blockInfoGlobal.nbt());
             }
         }
         return blockInfoGlobal;

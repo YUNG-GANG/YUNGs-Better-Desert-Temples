@@ -34,9 +34,9 @@ public class WhiteStainedGlassProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.WHITE_STAINED_GLASS) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, SELECTOR.get(randomSource), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.WHITE_STAINED_GLASS) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), SELECTOR.get(randomSource), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

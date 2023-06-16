@@ -29,8 +29,8 @@ public class YellowConcreteProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.YELLOW_CONCRETE) {
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.YELLOW_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_CONCRETE) {
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.YELLOW_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

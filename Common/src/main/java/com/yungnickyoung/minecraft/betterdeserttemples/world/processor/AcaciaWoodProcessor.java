@@ -63,15 +63,15 @@ public class AcaciaWoodProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.ACACIA_WOOD) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().getBlock() == Blocks.ACACIA_WOOD) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             BlockState blockState = SELECTOR.get(randomSource);
 
-            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && levelReader.getFluidState(blockInfoGlobal.pos).is(FluidTags.WATER)) {
+            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED) && levelReader.getFluidState(blockInfoGlobal.pos()).is(FluidTags.WATER)) {
                 blockState = blockState.setValue(BlockStateProperties.WATERLOGGED, true);
             }
 
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), blockState, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

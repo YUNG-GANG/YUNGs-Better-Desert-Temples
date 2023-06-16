@@ -29,8 +29,8 @@ public class BlueConcreteProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.BLUE_CONCRETE) {
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.BLUE_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.BLUE_CONCRETE) {
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.BLUE_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.RandomSequences;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -49,6 +50,7 @@ public abstract class ServerLevelMixin extends Level implements ITempleStateCach
                                           long l,
                                           List<CustomSpawner> list,
                                           boolean bl2,
+                                          RandomSequences $$11,
                                           CallbackInfo ci) {
         Path dimensionPath = levelStorageAccess.getDimensionPath(this.dimension());
         this.templeStateCache = new TempleStateCache(dimensionPath);

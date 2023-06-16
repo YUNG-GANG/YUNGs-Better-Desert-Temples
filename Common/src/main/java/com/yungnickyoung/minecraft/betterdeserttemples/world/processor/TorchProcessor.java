@@ -29,9 +29,9 @@ public class TorchProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.TORCH || blockInfoGlobal.state.getBlock() == Blocks.WALL_TORCH) {
-            if (structurePlacementData.getRandom(blockInfoGlobal.pos).nextFloat() > .05f) {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.TORCH || blockInfoGlobal.state().getBlock() == Blocks.WALL_TORCH) {
+            if (structurePlacementData.getRandom(blockInfoGlobal.pos()).nextFloat() > .05f) {
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt());
             }
         }
         return blockInfoGlobal;

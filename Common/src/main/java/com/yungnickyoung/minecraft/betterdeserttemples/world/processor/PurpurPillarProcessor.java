@@ -34,8 +34,8 @@ public class PurpurPillarProcessor extends StructureProcessor implements ISafeWo
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.PURPUR_PILLAR) {
-            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos.mutable();
+        if (blockInfoGlobal.state().getBlock() == Blocks.PURPUR_PILLAR) {
+            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable();
             BlockState blockState = Blocks.SANDSTONE_WALL.defaultBlockState()
                     .setValue(WallBlock.EAST_WALL, WallSide.NONE)
                     .setValue(WallBlock.WEST_WALL, WallSide.NONE)
@@ -47,7 +47,7 @@ public class PurpurPillarProcessor extends StructureProcessor implements ISafeWo
                 setBlockStateSafe(levelReader, mutable, blockState);
                 mutable.move(Direction.DOWN);
             }
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), blockState, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

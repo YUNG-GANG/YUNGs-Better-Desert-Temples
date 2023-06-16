@@ -160,17 +160,17 @@ public class RedBannerProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().getBlock() instanceof AbstractBannerBlock) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state.getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
+            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt().get("Patterns") == null || blockInfoGlobal.nbt().getList("Patterns", 10).size() == 0)) {
                 Banner banner = getRandomBanner(randomSource);
-                Direction facing = blockInfoGlobal.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                Direction facing = blockInfoGlobal.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
                 CompoundTag newNBT = copyNBT(banner.getNbt());
 
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, newState, newNBT);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), newState, newNBT);
             }
         }
         return blockInfoGlobal;

@@ -34,9 +34,9 @@ public class PolishedDioriteProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.POLISHED_DIORITE) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, SELECTOR.get(randomSource), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.POLISHED_DIORITE) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), SELECTOR.get(randomSource), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

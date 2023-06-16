@@ -38,29 +38,28 @@ public abstract class ServerPlayerTickMixin extends Player {
         super($$0, $$1, $$2, $$3);
     }
 
-    @Shadow
-    public abstract ServerLevel getLevel();
-
     @Shadow @Final public ServerPlayerGameMode gameMode;
+
+    @Shadow public abstract ServerLevel serverLevel();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void betterdeserttemples_playerTick(CallbackInfo info) {
         if (this.gameMode.isSurvival() && this.tickCount % 20 == 0) {
             BlockPos playerPos = this.blockPosition();
-            StructureStart structureStart = this.getLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
+            StructureStart structureStart = this.serverLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
 
             // Do not apply mining fatigue if player is not in temple or config option is disabled
-            boolean isInTemple = this.getLevel().isLoaded(playerPos) && structureStart.isValid();
+            boolean isInTemple = this.serverLevel().isLoaded(playerPos) && structureStart.isValid();
             if (!isInTemple || !BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
 
             // Do not apply mining fatigue if temple has been cleared
-            boolean isTempleCleared = ((ITempleStateCacheProvider) this.getLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
+            boolean isTempleCleared = ((ITempleStateCacheProvider) this.serverLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());
             if (isTempleCleared) return;
 
             // Apply mining fatigue
             if (!this.hasEffect(MobEffects.DIG_SLOWDOWN) || this.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier() < 2 || this.getEffect(MobEffects.DIG_SLOWDOWN).getDuration() < 120) {
                 if (!this.hasEffect(MobEffects.DIG_SLOWDOWN)) {
-                    this.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.ELDER_GUARDIAN_CURSE), SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, ((ServerLevel) level).getSeed()));
+                    this.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.ELDER_GUARDIAN_CURSE), SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, this.serverLevel().getSeed()));
                 }
                 this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 600, 2), this);
             }

@@ -34,7 +34,7 @@ public class YellowWoolProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.YELLOW_WOOL) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_WOOL) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.HUSK)
                     .maxNearbyEntities(8)
@@ -103,7 +103,7 @@ public class YellowWoolProcessor extends StructureProcessor {
                 }));
             }));
             CompoundTag nbt = spawnerData.save();
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }
         return blockInfoGlobal;
     }

@@ -31,15 +31,15 @@ public class EndStoneBrickWallProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.END_STONE_BRICK_WALL) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.END_STONE_BRICK_WALL) {
             BlockState blockState = Blocks.SANDSTONE_WALL.defaultBlockState()
-                    .setValue(WallBlock.EAST_WALL, blockInfoGlobal.state.getValue(WallBlock.EAST_WALL))
-                    .setValue(WallBlock.WEST_WALL, blockInfoGlobal.state.getValue(WallBlock.WEST_WALL))
-                    .setValue(WallBlock.NORTH_WALL, blockInfoGlobal.state.getValue(WallBlock.NORTH_WALL))
-                    .setValue(WallBlock.SOUTH_WALL, blockInfoGlobal.state.getValue(WallBlock.SOUTH_WALL))
-                    .setValue(WallBlock.UP, blockInfoGlobal.state.getValue(WallBlock.UP))
-                    .setValue(WallBlock.WATERLOGGED, blockInfoGlobal.state.getValue(WallBlock.WATERLOGGED));
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, blockState, blockInfoGlobal.nbt);
+                    .setValue(WallBlock.EAST_WALL, blockInfoGlobal.state().getValue(WallBlock.EAST_WALL))
+                    .setValue(WallBlock.WEST_WALL, blockInfoGlobal.state().getValue(WallBlock.WEST_WALL))
+                    .setValue(WallBlock.NORTH_WALL, blockInfoGlobal.state().getValue(WallBlock.NORTH_WALL))
+                    .setValue(WallBlock.SOUTH_WALL, blockInfoGlobal.state().getValue(WallBlock.SOUTH_WALL))
+                    .setValue(WallBlock.UP, blockInfoGlobal.state().getValue(WallBlock.UP))
+                    .setValue(WallBlock.WATERLOGGED, blockInfoGlobal.state().getValue(WallBlock.WATERLOGGED));
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), blockState, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

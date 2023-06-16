@@ -29,8 +29,8 @@ public class RedWoolProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.RED_WOOL) {
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.TNT.defaultBlockState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().getBlock() == Blocks.RED_WOOL) {
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.TNT.defaultBlockState(), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

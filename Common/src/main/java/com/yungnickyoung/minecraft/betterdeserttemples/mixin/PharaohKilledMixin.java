@@ -44,7 +44,7 @@ public abstract class PharaohKilledMixin extends Entity {
 
     @Inject(method = "die", at = @At("HEAD"))
     private void betterdeserttemples_pharaohDie(DamageSource damageSource, CallbackInfo info) {
-        if (!(level instanceof ServerLevel serverLevel)) return;
+        if (!(level() instanceof ServerLevel serverLevel)) return;
         if (!isPharaoh(this)) return;
 
         StructureStart structureStart = serverLevel.structureManager().getStructureWithPieceAt(this.blockPosition(), TagModule.APPLIES_MINING_FATIGUE);
@@ -52,12 +52,12 @@ public abstract class PharaohKilledMixin extends Entity {
             BlockPos structureStartPos = structureStart.getChunkPos().getWorldPosition();
 
             // Clear temple state
-            ((ITempleStateCacheProvider) this.level).getTempleStateCache().setTempleCleared(structureStartPos, true);
+            ((ITempleStateCacheProvider) this.level()).getTempleStateCache().setTempleCleared(structureStartPos, true);
 
             // Clear mining fatigue from all players in temple
             List<ServerPlayer> players = serverLevel.players();
             players.forEach(player -> {
-                if (level.isLoaded(player.blockPosition()) && serverLevel.structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
+                if (level().isLoaded(player.blockPosition()) && serverLevel.structureManager().getStructureWithPieceAt(player.blockPosition(), TagModule.APPLIES_MINING_FATIGUE).isValid()) {
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BEACON_DEACTIVATE), SoundSource.HOSTILE, this.getX(), this.getY(), this.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
                     player.removeEffect(MobEffects.DIG_SLOWDOWN);
                 }

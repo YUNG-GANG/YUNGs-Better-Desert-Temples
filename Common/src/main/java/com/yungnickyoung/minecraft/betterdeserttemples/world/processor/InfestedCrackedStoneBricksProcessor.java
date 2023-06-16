@@ -32,13 +32,13 @@ public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.INFESTED_CRACKED_STONE_BRICKS) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.INFESTED_CRACKED_STONE_BRICKS) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
                     .setEntityType(EntityType.SILVERFISH)
                     .requiredPlayerRange(24)
                     .build();
             CompoundTag nbt = spawnerData.save();
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.SPAWNER.defaultBlockState(), nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }
         return blockInfoGlobal;
     }

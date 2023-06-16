@@ -37,9 +37,9 @@ public class SpongeProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        Block block = blockInfoGlobal.state.getBlock();
+        Block block = blockInfoGlobal.state().getBlock();
         if (block == Blocks.SPONGE || block == Blocks.WET_SPONGE || block == Blocks.CANDLE) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             // Chance of spawning candle
             if (randomSource.nextFloat() < 0.8f) {
                 // Determine number of candles
@@ -55,9 +55,9 @@ public class SpongeProcessor extends StructureProcessor {
                 BlockState newBlockState = getRandomCandle(randomSource).defaultBlockState()
                         .setValue(CandleBlock.CANDLES, numCandles)
                         .setValue(CandleBlock.LIT, lit);
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, newBlockState, blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), newBlockState, blockInfoGlobal.nbt());
             } else {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), null);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), null);
             }
         }
         return blockInfoGlobal;
