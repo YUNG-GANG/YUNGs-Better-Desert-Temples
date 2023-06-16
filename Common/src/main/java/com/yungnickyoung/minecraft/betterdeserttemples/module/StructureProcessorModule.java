@@ -68,6 +68,9 @@ public class StructureProcessorModule {
     @AutoRegister("yellow_stained_glass_processor")
     public static StructureProcessorType<YellowStainedGlassProcessor> YELLOW_STAINED_GLASS_PROCESSOR = () -> YellowStainedGlassProcessor.CODEC;
 
+    @AutoRegister("orange_stained_glass_processor")
+    public static StructureProcessorType<OrangeStainedGlassProcessor> ORANGE_STAINED_GLASS_PROCESSOR = () -> OrangeStainedGlassProcessor.CODEC;
+
     @AutoRegister("red_wool_processor")
     public static StructureProcessorType<RedWoolProcessor> RED_WOOL_PROCESSOR = () -> RedWoolProcessor.CODEC;
 
