@@ -64,6 +64,9 @@
       "processor_type": "betterdeserttemples:red_wool_processor"
     },
     {
+      "processor_type": "betterdeserttemples:pot_processor"
+    },
+    {
       "processor_type": "betterdeserttemples:armor_stand_processor"
     },
     {

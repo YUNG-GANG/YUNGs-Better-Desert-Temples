@@ -71,6 +71,9 @@ public class StructureProcessorModule {
     @AutoRegister("red_wool_processor")
     public static StructureProcessorType<RedWoolProcessor> RED_WOOL_PROCESSOR = () -> RedWoolProcessor.CODEC;
 
+    @AutoRegister("pot_processor")
+    public static StructureProcessorType<PotProcessor> POT_PROCESSOR = () -> PotProcessor.CODEC;
+
     @AutoRegister("armor_stand_processor")
     public static StructureProcessorType<?> ARMOR_STAND_PROCESSOR = () -> Services.PROCESSORS.armorStandProcessorCodec();
 
