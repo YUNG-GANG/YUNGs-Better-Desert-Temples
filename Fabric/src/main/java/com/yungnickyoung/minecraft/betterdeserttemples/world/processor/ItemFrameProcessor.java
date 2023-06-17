@@ -43,6 +43,11 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
                 return globalEntityInfo;
             }
 
+            // Used to suppress dumb log spam
+            globalEntityInfo.nbt.putInt("TileX", globalEntityInfo.blockPos.getX());
+            globalEntityInfo.nbt.putInt("TileY", globalEntityInfo.blockPos.getY());
+            globalEntityInfo.nbt.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+
             if (item.equals("\"minecraft:iron_sword\"")) {
                 // Item frame has iron sword -> should use the armory pool
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
