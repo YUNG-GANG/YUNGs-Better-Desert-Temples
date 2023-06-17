@@ -44,7 +44,7 @@ public abstract class ServerPlayerTickMixin extends Player {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void betterdeserttemples_playerTick(CallbackInfo info) {
-        if (this.gameMode.isSurvival() && this.tickCount % 20 == 0) {
+        if (this.gameMode.isSurvival() && this.tickCount % 100 == 0) { // Check every 5 seconds
             BlockPos playerPos = this.blockPosition();
             StructureStart structureStart = this.serverLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
 
