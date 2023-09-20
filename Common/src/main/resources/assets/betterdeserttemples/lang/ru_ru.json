@@ -1,0 +1,9 @@
+{
+  "Use /locate structure betterdeserttemples:desert_temple instead!": "Используйте /locate structure betterdeserttemples:desert_temple вместо этого!",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.title": "Улучшенные пустынные храмы YUNG'а",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.disableVanillaPyramids": "Отключить ванильные пустынные храмы",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.disableVanillaPyramids.@Tooltip": "Должны ли быть отключены ванильные пустынные храмы.",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue": "Накладывать усталость",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue.@Tooltip[0]": "Должен ли накладываться эффект усталости на игроков, находящихся в храме",
+  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue.@Tooltip[1]": "если он ещё не был снят."
+}
