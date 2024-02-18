@@ -75,7 +75,7 @@ public class TempleStateRegion {
 
     private void writeRegionFile(CompoundTag compoundTag) {
         try {
-            NbtIo.write(compoundTag, regionFile);
+            NbtIo.write(compoundTag, regionFile.toPath());
         } catch (IOException e) {
             BetterDesertTemplesCommon.LOGGER.error("Encountered error writing data to temple region file {}", regionKey);
             BetterDesertTemplesCommon.LOGGER.error(e);
@@ -84,7 +84,7 @@ public class TempleStateRegion {
 
     private CompoundTag readRegionFile() {
         try {
-            return NbtIo.read(regionFile);
+            return NbtIo.read(regionFile.toPath());
         } catch (IOException e) {
             BetterDesertTemplesCommon.LOGGER.error("Encountered error reading data from temple region file {}", regionKey);
             BetterDesertTemplesCommon.LOGGER.error(e);
@@ -96,7 +96,7 @@ public class TempleStateRegion {
         if (!regionFile.exists()) {
             try {
                 regionFile.createNewFile();
-                NbtIo.write(new CompoundTag(), regionFile);
+                NbtIo.write(new CompoundTag(), regionFile.toPath());
             } catch (IOException e) {
                 BetterDesertTemplesCommon.LOGGER.error("Unable to create temple region file for region {}", regionKey);
                 BetterDesertTemplesCommon.LOGGER.error(e);

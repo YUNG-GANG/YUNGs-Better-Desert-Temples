@@ -16,9 +16,19 @@
   },
   "criteria": {
     "in_better_desert_temple": {
-      "trigger": "yungsapi:structure_location",
+      "trigger": "minecraft:location",
       "conditions": {
-        "feature": "betterdeserttemples:desert_temple"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "betterdeserttemples:desert_temple"
+              }
+            }
+          }
+        ]
       }
     }
   },
