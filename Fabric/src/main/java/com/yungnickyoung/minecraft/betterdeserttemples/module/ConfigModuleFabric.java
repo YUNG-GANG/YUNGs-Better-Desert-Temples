@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "fabric-1_20";
+    public static final String VERSION_PATH = "fabric-1_20_4";
 
     public static void init() {
         initCustomFiles();
