@@ -1,4 +1,10 @@
 {
+  "YUNG's Better Desert Temples": "Улучшенные пустынные храмы YUNG'a",
+  "Somewhere deep in the desert...": "Где-то глубоко в пустыне…",
+  "Eternal Slumber": "Вечный сон",
+  "Slay the Pharaoh and free the Temple from his curse": "Убейте фараона и освободите храм от его проклятия",
+  "An Ancient Tomb": "Древняя гробница",
+  "Discover a Better Desert Temple": "Откройте для себя улучшенный пустынный храм",  
   "Use /locate structure betterdeserttemples:desert_temple instead!": "Используйте /locate structure betterdeserttemples:desert_temple вместо этого!",
   "text.autoconfig.betterdeserttemples-fabric-1_20_4.title": "Улучшенные пустынные храмы YUNG'а",
   "text.autoconfig.betterdeserttemples-fabric-1_20_4.option.general.disableVanillaPyramids": "Отключить ванильные пустынные храмы",
