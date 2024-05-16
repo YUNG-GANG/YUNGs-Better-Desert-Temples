@@ -74,6 +74,9 @@
     },
     {
       "processor_type": "betterdeserttemples:item_frame_processor"
+    },
+    {
+      "processor_type": "betterdeserttemples:pharaoh_processor"
     }
   ]
 }

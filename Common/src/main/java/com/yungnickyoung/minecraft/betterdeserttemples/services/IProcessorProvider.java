@@ -7,4 +7,6 @@ public interface IProcessorProvider {
     Codec<StructureProcessor> armorStandProcessorCodec();
 
     Codec<StructureProcessor> itemFrameProcessorCodec();
+
+    Codec<StructureProcessor> pharaohProcessorCodec();
 }

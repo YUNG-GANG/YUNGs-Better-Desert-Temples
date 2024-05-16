@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @author TelepathicGrunt
  */
 @Mixin(StructureTemplate.class)
-public class StructureTemplateMixin {
+public abstract class StructureTemplateMixin {
     @Inject(method = "placeInWorld",
             at = @At(value = "HEAD"))
     private void betterdeserttemples_preventAutoWaterlogging(ServerLevelAccessor serverLevelAccessor, BlockPos blockPos1, BlockPos blockPos2, StructurePlaceSettings structurePlaceSettings, RandomSource random, int flag, CallbackInfoReturnable<Boolean> cir) {

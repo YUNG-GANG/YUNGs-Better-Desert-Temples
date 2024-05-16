@@ -45,12 +45,15 @@ public abstract class ServerPlayerTickMixin extends Player {
     @Inject(method = "tick", at = @At("HEAD"))
     private void betterdeserttemples_playerTick(CallbackInfo info) {
         if (this.gameMode.isSurvival() && this.tickCount % 100 == 0) { // Check every 5 seconds
+            // Do not apply mining fatigue if config option is disabled
+            if (!BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
+
             BlockPos playerPos = this.blockPosition();
             StructureStart structureStart = this.serverLevel().structureManager().getStructureWithPieceAt(playerPos, TagModule.APPLIES_MINING_FATIGUE);
 
-            // Do not apply mining fatigue if player is not in temple or config option is disabled
+            // Do not apply mining fatigue if player is not in temple
             boolean isInTemple = this.serverLevel().isLoaded(playerPos) && structureStart.isValid();
-            if (!isInTemple || !BetterDesertTemplesCommon.CONFIG.general.applyMiningFatigue) return;
+            if (!isInTemple) return;
 
             // Do not apply mining fatigue if temple has been cleared
             boolean isTempleCleared = ((ITempleStateCacheProvider) this.serverLevel()).getTempleStateCache().isTempleCleared(structureStart.getChunkPos().getWorldPosition());

@@ -5,15 +5,17 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterdeserttemples.refmap.json",
   "mixins": [
-    "accessor.ChunkGeneratorStructureStateAccessor",
     "DisableVanillaPyramidsMixin",
     "LocateVanillaPyramidCommandMixin",
-    "PharaohKilledMixin",
     "ServerLevelMixin",
     "ServerPlayerTickMixin",
     "StructureTemplateMixin",
     "accessor.BoundingBoxAccessor",
-    "accessor.StructureProcessorAccessor"
+    "accessor.ChunkGeneratorStructureStateAccessor",
+    "accessor.StructureProcessorAccessor",
+    "pharaoh.HuskMixin",
+    "pharaoh.LivingEntityMixin",
+    "pharaoh.ZombieMixin"
   ],
   "injectors": {
     "defaultRequire": 1

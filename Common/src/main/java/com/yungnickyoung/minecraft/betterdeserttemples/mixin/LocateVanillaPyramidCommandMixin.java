@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -21,7 +22,8 @@ import java.util.Optional;
  * Overrides behavior of /locate desert_pyramid.
  */
 @Mixin(LocateCommand.class)
-public class LocateVanillaPyramidCommandMixin {
+public abstract class LocateVanillaPyramidCommandMixin {
+    @Unique
     private static final SimpleCommandExceptionType OLD_PYRAMID_EXCEPTION =
         new SimpleCommandExceptionType(Component.translatable("Use /locate structure betterdeserttemples:desert_temple instead!"));
 

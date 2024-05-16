@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChunkGenerator.class)
-public class DisableVanillaPyramidsMixin {
+public abstract class DisableVanillaPyramidsMixin {
     /**
      * Prevents vanilla pyramids from generating.
      */

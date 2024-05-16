@@ -82,4 +82,7 @@ public class StructureProcessorModule {
 
     @AutoRegister("item_frame_processor")
     public static StructureProcessorType<?> ITEM_FRAME_PROCESSOR = () -> Services.PROCESSORS.itemFrameProcessorCodec();
+
+    @AutoRegister("pharaoh_processor")
+    public static StructureProcessorType<?> PHARAOH_PROCESSOR = () -> Services.PROCESSORS.pharaohProcessorCodec();
 }
