@@ -1,6 +1,5 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.mixin.pharaoh;
 
-import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import com.yungnickyoung.minecraft.betterdeserttemples.entity.IPharaohData;
 import com.yungnickyoung.minecraft.betterdeserttemples.util.PharaohUtil;
 import net.minecraft.nbt.CompoundTag;

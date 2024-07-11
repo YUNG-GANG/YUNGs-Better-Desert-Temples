@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -23,7 +23,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class QuartzPillarProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final QuartzPillarProcessor INSTANCE = new QuartzPillarProcessor();
-    public static final Codec<QuartzPillarProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<QuartzPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,

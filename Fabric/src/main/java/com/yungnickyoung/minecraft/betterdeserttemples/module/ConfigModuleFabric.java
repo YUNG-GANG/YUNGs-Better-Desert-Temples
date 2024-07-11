@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterdeserttemples";
-    public static final String VERSION_PATH = "fabric-1_20_4";
+    public static final String VERSION_PATH = "fabric-1_21";
 
     public static void init() {
         initCustomFiles();
@@ -69,10 +69,10 @@ public class ConfigModuleFabric {
                             This directory is for a few additional options for YUNG's Better Desert Temples.
                             Options provided may vary by version.
                             This directory contains subdirectories for supported versions. The first time you run Better Desert Temples, a version subdirectory will be created if that version supports advanced options.
-                            For example, the first time you use Better Desert Temples for 1.18.2 on Forge, the 'forge-1_18_2' subdirectory will be created in this folder.
+                            For example, the first time you use Better Desert Temples for 1.21 on Fabric, the 'fabric-1_21' subdirectory will be created in this folder.
                             If no subdirectory for your version is created, then that version probably does not support the additional options.
                             NOTE -- MOST OPTIONS CAN BE FOUND IN A CONFIG FILE OUTSIDE THIS FOLDER!
-                            For example, on Forge 1.18.2 the file is 'betterdeserttemples-forge-1_18_2.toml'.""";
+                            For example, on Fabric 1.21 the file is 'betterdeserttemples-fabric-1_21.toml'.""";
             try {
                 Files.write(path, readmeText.getBytes());
             } catch (IOException e) {

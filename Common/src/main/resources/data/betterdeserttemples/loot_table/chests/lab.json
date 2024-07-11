@@ -23,8 +23,10 @@
               "add": false
             },
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:water\"}"
+              "function": "minecraft:set_components",
+              "components": {
+                "potion_contents": "minecraft:water"
+              }
             }
           ],
           "name": "minecraft:potion"

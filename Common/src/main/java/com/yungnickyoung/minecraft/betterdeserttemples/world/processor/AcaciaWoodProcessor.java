@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class AcaciaWoodProcessor extends StructureProcessor {
     public static final AcaciaWoodProcessor INSTANCE = new AcaciaWoodProcessor();
-    public static final Codec<AcaciaWoodProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<AcaciaWoodProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     private static final BlockStateRandomizer SELECTOR = new BlockStateRandomizer(Blocks.SANDSTONE.defaultBlockState())
             .addBlock(Blocks.SANDSTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.BOTTOM), 0.1f)

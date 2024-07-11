@@ -1,6 +1,7 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.placement;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.yungnickyoung.minecraft.betterdeserttemples.mixin.accessor.ChunkGeneratorStructureStateAccessor;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructurePlacementTypeModule;
@@ -22,7 +23,7 @@ import java.util.Optional;
  * Custom structure placement that avoids intersecting with oceans and rivers.
  */
 public class BetterDesertTemplePlacement extends RandomSpreadStructurePlacement {
-    public static final Codec<BetterDesertTemplePlacement> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+    public static final MapCodec<BetterDesertTemplePlacement> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Vec3i.offsetCodec(16).optionalFieldOf("locate_offset", Vec3i.ZERO).forGetter(BetterDesertTemplePlacement::locateOffset),
             FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", FrequencyReductionMethod.DEFAULT).forGetter(BetterDesertTemplePlacement::frequencyReductionMethod),
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("frequency", 1.0F).forGetter(BetterDesertTemplePlacement::frequency),

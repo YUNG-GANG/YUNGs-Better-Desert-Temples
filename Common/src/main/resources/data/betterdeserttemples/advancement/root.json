@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:chiseled_sandstone"
+      "count": 1,
+      "id": "minecraft:chiseled_sandstone"
     },
     "title": {
       "translate": "YUNG's Better Desert Temples"

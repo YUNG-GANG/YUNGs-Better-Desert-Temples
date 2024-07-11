@@ -62,9 +62,6 @@ public class StructureProcessorModule {
     @AutoRegister("lit_campfire_processor")
     public static StructureProcessorType<LitCampfireProcessor> LIT_CAMPFIRE_PROCESSOR = () -> LitCampfireProcessor.CODEC;
 
-    @AutoRegister("waterlog_processor")
-    public static StructureProcessorType<WaterlogProcessor> WATERLOG_PROCESSOR = () -> WaterlogProcessor.CODEC;
-
     @AutoRegister("yellow_stained_glass_processor")
     public static StructureProcessorType<YellowStainedGlassProcessor> YELLOW_STAINED_GLASS_PROCESSOR = () -> YellowStainedGlassProcessor.CODEC;
 

@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class DioriteProcessor extends StructureProcessor {
     public static final DioriteProcessor INSTANCE = new DioriteProcessor();
-    public static final Codec<DioriteProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<DioriteProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     private static final BlockStateRandomizer SELECTOR = new BlockStateRandomizer(Blocks.SANDSTONE.defaultBlockState())
             .addBlock(Blocks.CUT_SANDSTONE.defaultBlockState(), 0.25f)

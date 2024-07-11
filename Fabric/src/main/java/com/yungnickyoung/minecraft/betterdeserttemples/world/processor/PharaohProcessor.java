@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.util.PharaohUtil;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PharaohProcessor extends StructureEntityProcessor {
     public static final PharaohProcessor INSTANCE = new PharaohProcessor();
-    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
@@ -27,7 +27,7 @@ public class PharaohProcessor extends StructureEntityProcessor {
                                                                StructureTemplate.StructureEntityInfo localEntityInfo,
                                                                StructureTemplate.StructureEntityInfo globalEntityInfo,
                                                                StructurePlaceSettings structurePlaceSettings) {
-        if (PharaohUtil.isPharaoh(globalEntityInfo.nbt)) {
+        if (PharaohUtil.isPharaoh(globalEntityInfo.nbt, serverLevelAccessor.registryAccess())) {
             PharaohUtil.attachSpawnPos(globalEntityInfo.nbt, globalEntityInfo.pos);
         }
         return globalEntityInfo;

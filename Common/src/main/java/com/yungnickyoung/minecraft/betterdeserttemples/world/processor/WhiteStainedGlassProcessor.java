@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class WhiteStainedGlassProcessor extends StructureProcessor {
     public static final WhiteStainedGlassProcessor INSTANCE = new WhiteStainedGlassProcessor();
-    public static final Codec<WhiteStainedGlassProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<WhiteStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     private static final BlockStateRandomizer SELECTOR = new BlockStateRandomizer()
             .addBlock(Blocks.COBWEB.defaultBlockState(), 0.4f);

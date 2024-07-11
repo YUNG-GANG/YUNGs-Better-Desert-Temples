@@ -2,7 +2,8 @@
   "parent": "betterdeserttemples:root",
   "display": {
     "icon": {
-      "item": "minecraft:golden_sword"
+      "count": 1,
+      "id": "minecraft:golden_sword"
     },
     "title": {
       "translate": "An Ancient Tomb"
@@ -24,7 +25,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "structure": "betterdeserttemples:desert_temple"
+                "structures": "betterdeserttemples:desert_temple"
               }
             }
           }

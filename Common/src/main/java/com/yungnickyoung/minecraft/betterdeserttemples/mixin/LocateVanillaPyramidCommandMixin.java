@@ -32,7 +32,7 @@ public abstract class LocateVanillaPyramidCommandMixin {
                                                      ResourceOrTagKeyArgument.Result<Structure> result,
                                                      CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<Structure>> optional = result.unwrap().left();
-        if (BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids && optional.isPresent() && optional.get().location().equals(new ResourceLocation("desert_pyramid"))) {
+        if (BetterDesertTemplesCommon.CONFIG.general.disableVanillaPyramids && optional.isPresent() && optional.get().location().equals(ResourceLocation.withDefaultNamespace("desert_pyramid"))) {
             throw OLD_PYRAMID_EXCEPTION.create();
         }
     }

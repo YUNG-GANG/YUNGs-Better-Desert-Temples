@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.google.common.collect.Lists;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -9,9 +9,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.AbstractBannerBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BannerPatterns;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -29,114 +31,114 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class RedBannerProcessor extends StructureProcessor {
     public static final RedBannerProcessor INSTANCE = new RedBannerProcessor();
-    public static final Codec<RedBannerProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<RedBannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     public static final Banner ANKH_BANNER_0 = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("bs", 15)
-            .pattern("sc", 4)
-            .pattern("sku", 4)
-            .pattern("mc", 15)
-            .pattern("ts", 15)
-            .pattern("cbo", 15)
+            .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
             .build();
 
     public static final Banner ANKH_BANNER_1 = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("bs", 15)
-            .pattern("sc", 4)
-            .pattern("sku", 15)
-            .pattern("sku", 4)
-            .pattern("mc", 15)
-            .pattern("bo", 4)
-            .pattern("ts", 15)
-            .pattern("cbo", 15)
+            .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.SKULL, DyeColor.BLACK)
+            .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.BORDER, DyeColor.YELLOW)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
             .build();
 
     public static final Banner ANKH_BANNER_2 = new Banner.Builder()
             .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
-            .pattern("flo", 4)
-            .pattern("mr", 15)
-            .pattern("sc", 4)
-            .pattern("sku", 4)
-            .pattern("mc", 15)
-            .pattern("bo", 15)
-            .pattern("ts", 15)
+            .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
+            .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.BORDER, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
             .build();
 
     public static final Banner ANKH_BANNER_3 = new Banner.Builder()
             .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
-            .pattern("flo", 4)
-            .pattern("sc", 4)
-            .pattern("ts", 15)
-            .pattern("sku", 4)
-            .pattern("mc", 15)
-            .pattern("bo", 15)
+            .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
+            .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.BORDER, DyeColor.BLACK)
             .build();
 
     public static final Banner ANKH_BANNER_4 = new Banner.Builder()
             .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
-            .pattern("ts", 15)
-            .pattern("tt", 4)
-            .pattern("cbo", 15)
-            .pattern("sc", 4)
-            .pattern("bo", 15)
-            .pattern("bo", 15)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.TRIANGLE_TOP, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.BORDER, DyeColor.BLACK)
+            .pattern(BannerPatterns.BORDER, DyeColor.BLACK)
             .build();
 
     public static final Banner CAT_BANNER = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("bri", 15)
-            .pattern("hhb", 4)
-            .pattern("rd", 4)
-            .pattern("mr", 4)
-            .pattern("ss", 4)
-            .pattern("cbo", 15)
-            .pattern("tts", 15)
-            .pattern("tl", 15)
-            .pattern("bs", 15)
-            .pattern("moj", 4)
+            .pattern(BannerPatterns.BRICKS, DyeColor.BLACK)
+            .pattern(BannerPatterns.HALF_HORIZONTAL_MIRROR, DyeColor.YELLOW)
+            .pattern(BannerPatterns.DIAGONAL_RIGHT, DyeColor.YELLOW)
+            .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.YELLOW)
+            .pattern(BannerPatterns.STRIPE_SMALL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
+            .pattern(BannerPatterns.TRIANGLES_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.SQUARE_TOP_LEFT, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
+            .pattern(BannerPatterns.MOJANG, DyeColor.YELLOW)
             .build();
 
     public static final Banner EMBLEM_BANNER_0 = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("cbo", 15)
-            .pattern("ts", 15)
-            .pattern("mc", 15)
-            .pattern("bt", 15)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
+            .pattern(BannerPatterns.TRIANGLE_BOTTOM, DyeColor.BLACK)
             .build();
 
     public static final Banner EMBLEM_BANNER_0_BLUE = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("bt", 11)
-            .pattern("cbo", 11)
-            .pattern("ts", 11)
-            .pattern("mc", 11)
+            .pattern(BannerPatterns.TRIANGLE_BOTTOM, DyeColor.BLUE)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLUE)
+            .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLUE)
+            .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLUE)
             .build();
 
     public static final Banner EMBLEM_BANNER_1 = new Banner.Builder()
             .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
-            .pattern("mr", 4)
-            .pattern("flo", 15)
+            .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.YELLOW)
+            .pattern(BannerPatterns.FLOWER, DyeColor.BLACK)
             .build();
 
     public static final Banner PYRAMID_BANNER = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("bri", 0)
-            .pattern("bri", 4)
-            .pattern("ld", 3)
-            .pattern("rud", 3)
-            .pattern("tr", 4)
+            .pattern(BannerPatterns.BRICKS, DyeColor.WHITE)
+            .pattern(BannerPatterns.BRICKS, DyeColor.YELLOW)
+            .pattern(BannerPatterns.DIAGONAL_LEFT, DyeColor.LIGHT_BLUE)
+            .pattern(BannerPatterns.DIAGONAL_RIGHT_MIRROR, DyeColor.LIGHT_BLUE)
+            .pattern(BannerPatterns.SQUARE_TOP_RIGHT, DyeColor.YELLOW)
             .build();
 
     public static final Banner SPHINX_BANNER = new Banner.Builder()
             .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
-            .pattern("hh", 4)
-            .pattern("tl", 3)
-            .pattern("cbo", 3)
-            .pattern("moj", 4)
-            .pattern("tts", 3)
-            .pattern("hhb", 1)
+            .pattern(BannerPatterns.HALF_HORIZONTAL, DyeColor.YELLOW)
+            .pattern(BannerPatterns.SQUARE_TOP_LEFT, DyeColor.LIGHT_BLUE)
+            .pattern(BannerPatterns.CURLY_BORDER, DyeColor.LIGHT_BLUE)
+            .pattern(BannerPatterns.MOJANG, DyeColor.YELLOW)
+            .pattern(BannerPatterns.TRIANGLES_TOP, DyeColor.LIGHT_BLUE)
+            .pattern(BannerPatterns.HALF_HORIZONTAL_MIRROR, DyeColor.ORANGE)
             .build();
 
     public static final List<Banner> WALL_BANNERS = Lists.newArrayList(
@@ -164,7 +166,7 @@ public class RedBannerProcessor extends StructureProcessor {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt().get("Patterns") == null || blockInfoGlobal.nbt().getList("Patterns", 10).size() == 0)) {
+            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt().get("patterns") == null || blockInfoGlobal.nbt().getList("patterns", 10).isEmpty())) {
                 Banner banner = getRandomBanner(randomSource);
                 Direction facing = blockInfoGlobal.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);

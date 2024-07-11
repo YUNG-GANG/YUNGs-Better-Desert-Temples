@@ -9,7 +9,6 @@
     "LocateVanillaPyramidCommandMixin",
     "ServerLevelMixin",
     "ServerPlayerTickMixin",
-    "StructureTemplateMixin",
     "accessor.BoundingBoxAccessor",
     "accessor.ChunkGeneratorStructureStateAccessor",
     "accessor.StructureProcessorAccessor",

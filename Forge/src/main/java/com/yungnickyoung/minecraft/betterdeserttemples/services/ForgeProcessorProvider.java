@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.services;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.ArmorStandProcessor;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.ItemFrameProcessor;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.PharaohProcessor;
@@ -8,17 +8,17 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class ForgeProcessorProvider implements IProcessorProvider {
     @Override
-    public Codec<StructureProcessor> armorStandProcessorCodec() {
+    public MapCodec<StructureProcessor> armorStandProcessorCodec() {
         return ArmorStandProcessor.CODEC;
     }
 
     @Override
-    public Codec<StructureProcessor> itemFrameProcessorCodec() {
+    public MapCodec<StructureProcessor> itemFrameProcessorCodec() {
         return ItemFrameProcessor.CODEC;
     }
 
     @Override
-    public Codec<StructureProcessor> pharaohProcessorCodec() {
+    public MapCodec<StructureProcessor> pharaohProcessorCodec() {
         return PharaohProcessor.CODEC;
     }
 }

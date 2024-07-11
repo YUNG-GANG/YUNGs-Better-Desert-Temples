@@ -1,10 +1,11 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ItemFrameProcessor extends StructureProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
-    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
@@ -41,31 +42,37 @@ public class ItemFrameProcessor extends StructureProcessor {
                 return globalEntityInfo;
             }
 
-            // Used to suppress dumb log spam
-            globalEntityInfo.nbt.putInt("TileX", globalEntityInfo.blockPos.getX());
-            globalEntityInfo.nbt.putInt("TileY", globalEntityInfo.blockPos.getY());
-            globalEntityInfo.nbt.putInt("TileZ", globalEntityInfo.blockPos.getZ());
-
-            if (item.equals("\"minecraft:iron_sword\"")) {
-                // Item frame has iron sword -> should use the armory pool
+            // Set the item in the item frame's NBT
+            CompoundTag newNBT = globalEntityInfo.nbt.copy();
+            if (item.equals("\"minecraft:iron_sword\"")) { // Armory pool
                 String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
-                    globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
+                    newNBT.getCompound("Item").putString("id", randomItemString);
+                } else {
+                    newNBT.remove("Item");
                 }
-            } else if (item.equals("\"minecraft:bread\"")) {
-                // Item frame has bread -> should use the storage pool
+            } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
                 String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
-                    globalEntityInfo.nbt.getCompound("Item").putString("id", randomItemString);
+                    newNBT.getCompound("Item").putString("id", randomItemString);
+                } else {
+                    newNBT.remove("Item");
                 }
             } else {
                 // No match -- item frame must be for a different purpose
                 return globalEntityInfo;
             }
 
+            // Required to suppress dumb log spam
+            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
+            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
+            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+
             // Randomize rotation
             int randomRotation = randomSource.nextInt(8);
-            globalEntityInfo.nbt.putByte("ItemRotation", (byte) randomRotation);
+            newNBT.putByte("ItemRotation", (byte) randomRotation);
+
+            globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
         }
         return globalEntityInfo;
     }

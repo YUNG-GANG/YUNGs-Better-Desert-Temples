@@ -8,5 +8,5 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 public class TagModule {
     public static TagKey<Structure> APPLIES_MINING_FATIGUE = TagKey.create(Registries.STRUCTURE,
-            new ResourceLocation(BetterDesertTemplesCommon.MOD_ID, "applies_mining_fatigue"));
+            ResourceLocation.fromNamespaceAndPath(BetterDesertTemplesCommon.MOD_ID, "applies_mining_fatigue"));
 }

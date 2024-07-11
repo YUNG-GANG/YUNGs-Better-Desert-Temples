@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class SpongeProcessor extends StructureProcessor {
     public static final SpongeProcessor INSTANCE = new SpongeProcessor();
-    public static final Codec<SpongeProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<SpongeProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     private static final List<Block> CANDLES = List.of(Blocks.CANDLE, Blocks.WHITE_CANDLE, Blocks.GRAY_CANDLE,
             Blocks.LIGHT_GRAY_CANDLE, Blocks.BROWN_CANDLE, Blocks.ORANGE_CANDLE);
