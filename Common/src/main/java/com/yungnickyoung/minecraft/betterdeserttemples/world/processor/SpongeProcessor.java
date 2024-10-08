@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 /**
- * Replaces sponges w/ candles of random amount & color.
+ * Replaces sponges with candles of random amount and color.
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
