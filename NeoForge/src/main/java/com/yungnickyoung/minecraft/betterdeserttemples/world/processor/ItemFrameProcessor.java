@@ -42,8 +42,14 @@ public class ItemFrameProcessor extends StructureProcessor {
                 return globalEntityInfo;
             }
 
-            // Set the item in the item frame's NBT
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
+
+            // Required to suppress dumb log spam. Applies to all item frames.
+            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
+            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
+            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+
+            // Set the item in the item frame's NBT
             if (item.equals("\"minecraft:iron_sword\"")) { // Armory pool
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
@@ -60,13 +66,9 @@ public class ItemFrameProcessor extends StructureProcessor {
                 }
             } else {
                 // No match -- item frame must be for a different purpose
+                globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
                 return globalEntityInfo;
             }
-
-            // Required to suppress dumb log spam
-            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
-            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
-            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
 
             // Randomize rotation
             int randomRotation = randomSource.nextInt(8);
