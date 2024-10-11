@@ -61,6 +61,9 @@
       "processor_type": "betterdeserttemples:orange_stained_glass_processor"
     },
     {
+      "processor_type": "betterdeserttemples:red_stained_glass_processor"
+    },
+    {
       "processor_type": "betterdeserttemples:red_wool_processor"
     },
     {
@@ -74,6 +77,23 @@
     },
     {
       "processor_type": "betterdeserttemples:pharaoh_processor"
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "minecraft:tinted_glass",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:sandstone"
+          }
+        }
+      ]
     }
   ]
 }

@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -18,11 +17,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 /**
- * Replaces orange stained-glass with sand and, rarely, suspicious sand.
+ * Replaces red stained-glass with sandstone, sandstone stairs.
  */
-public class OrangeStainedGlassProcessor extends StructureProcessor {
-    public static final OrangeStainedGlassProcessor INSTANCE = new OrangeStainedGlassProcessor();
-    public static final MapCodec<OrangeStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
+public class RedStainedGlassProcessor extends StructureProcessor {
+    public static final RedStainedGlassProcessor INSTANCE = new RedStainedGlassProcessor();
+    public static final MapCodec<RedStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
@@ -31,32 +30,26 @@ public class OrangeStainedGlassProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.ORANGE_STAINED_GLASS) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.RED_STAINED_GLASS) {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             float f = randomSource.nextFloat();
-            if (f < 0.01f) {
-                // place suspicious sand
-                CompoundTag nbt = new CompoundTag();
-                nbt.putString("LootTable", "minecraft:archaeology/desert_pyramid");
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SUSPICIOUS_SAND.defaultBlockState(), nbt);
-            } else if (f < 0.1f) {
+
+            if (f < 0.3f) {
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SAND.defaultBlockState(), blockInfoGlobal.nbt());
-            } else if (f < 0.2f) {
+            } else if (f < 0.75f) {
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SANDSTONE.defaultBlockState(), blockInfoGlobal.nbt());
-            } else if (f < 0.45f) {
+            } else {
                 BlockState state = Blocks.SANDSTONE_STAIRS.defaultBlockState()
                         .setValue(StairBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(randomSource))
                         .setValue(StairBlock.HALF, Half.TOP)
                         .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT);
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), state, blockInfoGlobal.nbt());
-            } else {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.CUT_SANDSTONE.defaultBlockState(), blockInfoGlobal.nbt());
             }
         }
         return blockInfoGlobal;
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.ORANGE_STAINED_GLASS_PROCESSOR;
+        return StructureProcessorModule.RED_STAINED_GLASS_PROCESSOR;
     }
 }
