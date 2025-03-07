@@ -83,13 +83,14 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "enchantments": [
+              "options": [
                 "binding_curse",
                 "vanishing_curse"
               ]
             },
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_helmet"
@@ -100,13 +101,14 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "enchantments": [
+              "options": [
                 "binding_curse",
                 "vanishing_curse"
               ]
             },
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_chestplate"
@@ -117,13 +119,14 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "enchantments": [
+              "options": [
                 "binding_curse",
                 "vanishing_curse"
               ]
             },
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_leggings"
@@ -134,13 +137,14 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "enchantments": [
+              "options": [
                 "binding_curse",
                 "vanishing_curse"
               ]
             },
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_boots"
@@ -150,7 +154,8 @@
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_helmet"
@@ -160,7 +165,8 @@
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_chestplate"
@@ -170,7 +176,8 @@
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_leggings"
@@ -180,7 +187,8 @@
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:leather_boots"
