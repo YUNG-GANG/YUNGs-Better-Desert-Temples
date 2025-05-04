@@ -1,9 +1,17 @@
 {
-  "Use /locate structure betterdeserttemples:desert_temple instead!": "Usá /locate structure betterdeserttemples:desert_temple en su lugar.",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.title": "Templos del Desierto Mejorados YUNG",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.disableVanillaPyramids": "Desactivar pirámides vanilla",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.disableVanillaPyramids.@Tooltip": "Indica si se deben desactivar las pirámides del desierto originales del juego.",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue": "Aplicar fatiga minera",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue.@Tooltip[0]": "Indica si se aplica fatiga minera a los jugadores dentro del templo",
-  "text.autoconfig.betterdeserttemples-fabric-1_20.option.general.applyMiningFatigue.@Tooltip[1]": "si todavía no fue limpiado."
+  "betterdeserttemples.advancements.root.title": "YUNG's Better Desert Temples",
+  "betterdeserttemples.advancements.root.description": "En algún lugar profundo del desierto...",
+  "betterdeserttemples.advancements.temple_clear.title": "Sueño Eterno",
+  "betterdeserttemples.advancements.temple_clear.description": "Derrotá al Faraón y liberá al Templo de su maldición",
+  "betterdeserttemples.advancements.temple_entry.title": "Una Tumba Antigua",
+  "betterdeserttemples.advancements.temple_entry.description": "Descubrí un Templo del Desierto Mejorado",
+
+  "Use /locate structure betterdeserttemples:desert_temple instead!": "¡Usá /locate structure betterdeserttemples:desert_temple en su lugar!",
+
+  "text.autoconfig.betterdeserttemples-fabric-1_21.title": "YUNG's Better Desert Temples",
+  "text.autoconfig.betterdeserttemples-fabric-1_21.option.general.disableVanillaPyramids": "Desactivar pirámides vanilla",
+  "text.autoconfig.betterdeserttemples-fabric-1_21.option.general.disableVanillaPyramids.@Tooltip": "Indica si se deben desactivar las pirámides del desierto vanilla.",
+  "text.autoconfig.betterdeserttemples-fabric-1_21.option.general.applyMiningFatigue": "Aplicar fatiga minera",
+  "text.autoconfig.betterdeserttemples-fabric-1_21.option.general.applyMiningFatigue.@Tooltip[0]": "Indica si se aplica fatiga minera a los jugadores dentro del templo",
+  "text.autoconfig.betterdeserttemples-fabric-1_21.option.general.applyMiningFatigue.@Tooltip[1]": "si todavía no fue despejado."
 }
