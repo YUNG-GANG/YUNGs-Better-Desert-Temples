@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -20,8 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Randomizes decorated pots' sherds.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class PotProcessor extends StructureProcessor {
     public static final PotProcessor INSTANCE = new PotProcessor();
     public static final MapCodec<PotProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

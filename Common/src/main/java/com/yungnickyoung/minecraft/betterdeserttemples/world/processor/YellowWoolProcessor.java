@@ -3,8 +3,8 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.Util;
+
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,8 +21,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces yellow wool with buffed husk spawner.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class YellowWoolProcessor extends StructureProcessor {
     public static final YellowWoolProcessor INSTANCE = new YellowWoolProcessor();
     public static final MapCodec<YellowWoolProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

@@ -3,8 +3,8 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.Util;
+
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,8 +21,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces bone blocks with unarmed skeleton spawner.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class BoneBlockProcessor extends StructureProcessor {
     public static final BoneBlockProcessor INSTANCE = new BoneBlockProcessor();
     public static final MapCodec<BoneBlockProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

@@ -8,11 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.DoubleTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -20,13 +18,15 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.monster.zombie.Husk;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PharaohUtil {
@@ -37,32 +37,29 @@ public class PharaohUtil {
             return false;
         }
 
-        for (ItemStack armorItem : husk.getArmorSlots()) {
-            if (armorItem.is(Items.PLAYER_HEAD)) {
-                ResolvableProfile profile = armorItem.get(DataComponents.PROFILE);
-                if (profile == null) continue;
-
-                return profile.properties().values().stream()
-                        .filter(property -> property.name().equals("textures"))
-                        .anyMatch(property -> property.value().equals(PHARAOH_HEAD_TEXTURE));
-            }
-        }
-
-        return false;
+        return Arrays.stream(EquipmentSlot.values())
+                .map(husk::getItemBySlot)
+                .filter(is -> is.is(Items.PLAYER_HEAD))
+                .anyMatch(PharaohUtil::isPharoahHead);
     }
 
     public static boolean isPharaoh(CompoundTag mobNbt, RegistryAccess registryAccess) {
-        if (!mobNbt.getString("id").equals("minecraft:husk")) return false;
+        if (!mobNbt.getStringOr("id", "").equals("minecraft:husk")) return false;
 
-        ListTag armorItems = mobNbt.getList("ArmorItems", Tag.TAG_COMPOUND);
+        ListTag armorItems = mobNbt.getListOrEmpty("ArmorItems");
         if (armorItems.size() != 4) return false;
 
-        CompoundTag helmetTag = armorItems.getCompound(3);
-        ItemStack helmetItemStack = ItemStack.parseOptional(registryAccess, helmetTag);
+        CompoundTag helmetTag = armorItems.getCompoundOrEmpty(3);
+        ItemStack helmetItemStack = ItemStack.OPTIONAL_CODEC.parse(RegistryOps.create(NbtOps.INSTANCE, registryAccess), helmetTag)
+                .result().orElse(ItemStack.EMPTY);
         if (!helmetItemStack.is(Items.PLAYER_HEAD)) return false;
 
+        return isPharoahHead(helmetItemStack);
+    }
+
+    private static boolean isPharoahHead(final ItemStack helmetItemStack) {
         ResolvableProfile profile = helmetItemStack.get(DataComponents.PROFILE);
-        return profile != null && profile.properties().values().stream()
+        return profile != null && profile.partialProfile().properties().values().stream()
                 .filter(property -> property.name().equals("textures"))
                 .anyMatch(property -> property.value().equals(PHARAOH_HEAD_TEXTURE));
     }
@@ -108,13 +105,13 @@ public class PharaohUtil {
             // Clear mining fatigue for all players in the temple
             playersInTemple.forEach(player -> {
                 player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BEACON_DEACTIVATE), SoundSource.HOSTILE, pharaoh.getX(), pharaoh.getY(), pharaoh.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
-                player.removeEffect(MobEffects.DIG_SLOWDOWN);
+                player.removeEffect(MobEffects.MINING_FATIGUE);
             });
 
             // Also clear mining fatigue for the player who killed the pharaoh, just in case they aren't in the temple
             if (damageSource != null && damageSource.getEntity() instanceof ServerPlayer killer && !playersInTemple.contains(killer)) {
                 killer.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BEACON_DEACTIVATE), SoundSource.HOSTILE, pharaoh.getX(), pharaoh.getY(), pharaoh.getZ(), 1.0F, 1.0F, serverLevel.getSeed()));
-                killer.removeEffect(MobEffects.DIG_SLOWDOWN);
+                killer.removeEffect(MobEffects.MINING_FATIGUE);
             }
 
             BetterDesertTemplesCommon.LOGGER.info("Cleared Better Desert Temple at x={}, z={}", structureStartPos.getX(), structureStartPos.getZ());

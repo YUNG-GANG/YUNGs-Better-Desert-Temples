@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ArmorStandChances;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +23,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Gives armor stands random armor depending on the type of armor
  * they are already wearing.
  */
-@ParametersAreNonnullByDefault
+
 public class ArmorStandProcessor extends StructureProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
     public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

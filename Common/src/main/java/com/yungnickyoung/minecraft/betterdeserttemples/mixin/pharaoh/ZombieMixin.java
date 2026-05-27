@@ -5,47 +5,34 @@ import com.yungnickyoung.minecraft.betterdeserttemples.util.PharaohUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Optional;
+
 @Mixin(Zombie.class)
 public class ZombieMixin {
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
-    private void betterdeserttemples_readPharaohOriginalSpawnPosFromNbt(CompoundTag compoundTag, CallbackInfo info) {
+    private void betterdeserttemples_readPharaohOriginalSpawnPosFromNbt(final ValueInput input, final CallbackInfo ci) {
         if (PharaohUtil.isPharaoh(this)) {
-            ListTag originalSpawnPos = compoundTag.getList("bdtOriginalSpawnPos", ListTag.TAG_DOUBLE);
+            input.read("bdtOriginalSpawnPos", Vec3.CODEC).ifPresent(originalSpawnPos -> {
+                ((IPharaohData) this).setOriginalSpawnPos(originalSpawnPos);
+            });
 
-            if (originalSpawnPos.size() != 3) {
-//                BetterDesertTemplesCommon.LOGGER.error("Pharaoh entity is missing original spawn position data. Unable to read original spawn position.");
-                return;
-            }
-
-            double spawnX = originalSpawnPos.getDouble(0);
-            double spawnY = originalSpawnPos.getDouble(1);
-            double spawnZ = originalSpawnPos.getDouble(2);
-            ((IPharaohData) this).setOriginalSpawnPos(new Vec3(spawnX, spawnY, spawnZ));
         }
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-    private void betterdeserttemples_writePharaohOriginalSpawnPosToNbt(CompoundTag compoundTag, CallbackInfo info) {
+    private void betterdeserttemples_writePharaohOriginalSpawnPosToNbt(final ValueOutput output, final CallbackInfo ci) {
         if (PharaohUtil.isPharaoh(this)) {
             Vec3 originalSpawnPos = ((IPharaohData) this).getOriginalSpawnPos();
-
-            if (originalSpawnPos == null) {
-//                BetterDesertTemplesCommon.LOGGER.error("Pharaoh entity is missing original spawn position data. Unable to write original spawn position to NBT.");
-                return;
-            }
-
-            ListTag originalSpawnPosList = new ListTag();
-            originalSpawnPosList.add(DoubleTag.valueOf(originalSpawnPos.x));
-            originalSpawnPosList.add(DoubleTag.valueOf(originalSpawnPos.y));
-            originalSpawnPosList.add(DoubleTag.valueOf(originalSpawnPos.z));
-            compoundTag.put("bdtOriginalSpawnPos", originalSpawnPosList);
+            output.store("bdtOriginalSpawnPos", Vec3.CODEC, originalSpawnPos);
         }
     }
 }

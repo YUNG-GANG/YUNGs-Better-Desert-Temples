@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.WorldGenRegion;
@@ -20,8 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces yellow stained-glass with dynamically generated legs below the pyramid.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class YellowStainedGlassProcessor extends StructureProcessor {
     public static final YellowStainedGlassProcessor INSTANCE = new YellowStainedGlassProcessor();
     public static final MapCodec<YellowStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
@@ -34,7 +34,7 @@ public class YellowStainedGlassProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_STAINED_GLASS) {
-            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(blockInfoGlobal.pos()))) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
                 return blockInfoGlobal;
             }
 
@@ -45,7 +45,7 @@ public class YellowStainedGlassProcessor extends StructureProcessor {
             while (mutable.getY() > levelReader.getMinY()
                     && mutable.getY() < levelReader.getMaxY()
                     && (currBlockState.isAir() || !levelReader.getFluidState(mutable).isEmpty())) {
-                levelReader.getChunk(mutable).setBlockState(mutable, Blocks.SANDSTONE.defaultBlockState(), false);
+                levelReader.getChunk(mutable).setBlockState(mutable, Blocks.SANDSTONE.defaultBlockState());
                 mutable.move(Direction.DOWN);
                 currBlockState = levelReader.getBlockState(mutable);
             }

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,12 +23,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Replaces red banners with a random banner.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class RedBannerProcessor extends StructureProcessor {
     public static final RedBannerProcessor INSTANCE = new RedBannerProcessor();
     public static final MapCodec<RedBannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
@@ -166,7 +167,9 @@ public class RedBannerProcessor extends StructureProcessor {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER && (blockInfoGlobal.nbt().get("patterns") == null || blockInfoGlobal.nbt().getList("patterns", 10).isEmpty())) {
+            var globalNbt = Objects.requireNonNullElseGet(blockInfoGlobal.nbt(), CompoundTag::new);
+            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER &&
+                globalNbt.getList("patterns").filter(l -> !l.isEmpty()).isEmpty()) {
                 Banner banner = getRandomBanner(randomSource);
                 Direction facing = blockInfoGlobal.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);

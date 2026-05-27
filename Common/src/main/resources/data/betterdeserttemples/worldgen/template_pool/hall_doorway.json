@@ -183,7 +183,370 @@
       }
     },
     {
-      "weight": 5000,
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "name": "drowning_trap",
+        "location": "betterdeserttemples:hall_room/drowning_trap",
+        "processors": "betterdeserttemples:main",
+        "projection": "rigid",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 50,
       "element": {
         "name": "drowning_trap",
         "location": "betterdeserttemples:hall_room/drowning_trap",

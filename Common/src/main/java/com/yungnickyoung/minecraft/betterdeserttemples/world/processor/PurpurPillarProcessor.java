@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
@@ -21,8 +21,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces purpur pillars with an 8-high tall column of sandstone walls.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class PurpurPillarProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final PurpurPillarProcessor INSTANCE = new PurpurPillarProcessor();
     public static final MapCodec<PurpurPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
@@ -37,10 +37,10 @@ public class PurpurPillarProcessor extends StructureProcessor implements ISafeWo
         if (blockInfoGlobal.state().getBlock() == Blocks.PURPUR_PILLAR) {
             BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable();
             BlockState blockState = Blocks.SANDSTONE_WALL.defaultBlockState()
-                    .setValue(WallBlock.EAST_WALL, WallSide.NONE)
-                    .setValue(WallBlock.WEST_WALL, WallSide.NONE)
-                    .setValue(WallBlock.NORTH_WALL, WallSide.NONE)
-                    .setValue(WallBlock.SOUTH_WALL, WallSide.NONE)
+                    .setValue(WallBlock.EAST, WallSide.NONE)
+                    .setValue(WallBlock.WEST, WallSide.NONE)
+                    .setValue(WallBlock.NORTH, WallSide.NONE)
+                    .setValue(WallBlock.SOUTH, WallSide.NONE)
                     .setValue(WallBlock.UP, true)
                     .setValue(WallBlock.WATERLOGGED, false);
             for (int i = 0; i < 8; i++) {
