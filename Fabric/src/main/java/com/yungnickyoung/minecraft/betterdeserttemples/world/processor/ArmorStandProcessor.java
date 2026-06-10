@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ArmorStandProcessor extends StructureEntityProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
