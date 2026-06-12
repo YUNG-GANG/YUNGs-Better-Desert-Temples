@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ArmorStandProcessor extends StructureEntityProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
@@ -41,54 +41,50 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
                                                                StructureTemplate.StructureEntityInfo globalEntityInfo,
                                                                StructurePlaceSettings structurePlaceSettings) {
         if (globalEntityInfo.nbt.getStringOr("id", "").equals("minecraft:armor_stand")) {
-            ListTag armorItems = globalEntityInfo.nbt.getListOrEmpty("ArmorItems");
-            RandomSource randomSource = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+            CompoundTag equipment = globalEntityInfo.nbt.getCompoundOrEmpty("equipment");
+            RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Type depends on the helmet and nothing else
-            String helmet;
-            try {
-                helmet = armorItems.getCompoundOrEmpty(3).getStringOr("id", "");
-            } catch (Exception e) {
-                BetterDesertTemplesCommon.LOGGER.info("Unable to randomize armor stand at {}. Missing helmet?", globalEntityInfo.blockPos);
-                return globalEntityInfo;
-            }
+            String helmet = equipment.getCompoundOrEmpty("head").getStringOr("id", "");
 
             // Iron helmet indicates we should use the armory pool. Otherwise, use the wardrobe pool.
             boolean isArmory = helmet.equals("minecraft:iron_helmet");
 
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
-            ListTag armorItemsList = newNBT.getListOrEmpty("ArmorItems");
-
+            if (!newNBT.contains("equipment")) {
+                newNBT.put("equipment", new CompoundTag());
+            }
+            CompoundTag newEquipment = newNBT.getCompoundOrEmpty("equipment");
             // Boots
             String bootsString = isArmory
-                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryBoots(randomSource)).toString()
-                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeBoots(randomSource)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryBoots(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeBoots(random)).toString();
             if (!bootsString.equals("minecraft:air")) {
-                putItem(serverLevelAccessor.registryAccess(), armorItemsList, 0, bootsString);
+                addEquipment(bootsString, newEquipment, "feet");
             }
 
             // Leggings
             String leggingsString = isArmory
-                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryLeggings(randomSource)).toString()
-                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeLeggings(randomSource)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryLeggings(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeLeggings(random)).toString();
             if (!leggingsString.equals("minecraft:air")) {
-                putItem(serverLevelAccessor.registryAccess(), armorItemsList, 1, leggingsString);
+                addEquipment(leggingsString, newEquipment, "legs");
             }
 
             // Chestplate
             String chestplateString = isArmory
-                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryChestplate(randomSource)).toString()
-                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeChestplate(randomSource)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryChestplate(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeChestplate(random)).toString();
             if (!chestplateString.equals("minecraft:air")) {
-                putItem(serverLevelAccessor.registryAccess(), armorItemsList, 2, chestplateString);
+                addEquipment(chestplateString, newEquipment, "chest");
             }
 
             // Helmet
             String helmetString = isArmory
-                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryHelmet(randomSource)).toString()
-                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeHelmet(randomSource)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getArmoryHelmet(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getWardrobeHelmet(random)).toString();
             if (!helmetString.equals("minecraft:air")) {
-                putItem(serverLevelAccessor.registryAccess(), armorItemsList, 3, helmetString);
+                addEquipment(helmetString, newEquipment, "head");
             }
 
             globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
@@ -96,18 +92,11 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
         return globalEntityInfo;
     }
 
-    private static void putItem(final HolderGetter.Provider registries, final ListTag armorItemsList, final int idx, final String itemId) {
-        armorItemsList.setTag(
-                idx,
-                Util.make(
-                        new CompoundTag(), t -> ItemStack.CODEC.encode(
-                                new ItemStack(registries
-                                                      .get(ResourceKey.create(
-                                                              Registries.ITEM,
-                                                              Identifier.parse(itemId)))
-                                                      .orElseThrow()),
-                                NbtOps.INSTANCE,
-                                t)));
+    private static void addEquipment(final String id, final CompoundTag newEquipment, final String key) {
+        var bootsTag = new CompoundTag();
+        bootsTag.putString("id", id);
+        bootsTag.putInt("count", 1);
+        newEquipment.put(key, bootsTag);
     }
 
     @Nullable
@@ -121,7 +110,7 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override protected StructureProcessorType<?> getType() {
         return StructureProcessorModule.ARMOR_STAND_PROCESSOR;
     }
 }
