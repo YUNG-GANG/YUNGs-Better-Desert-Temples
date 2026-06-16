@@ -15,7 +15,7 @@
     "show_toast": false,
     "announce_to_chat": false,
     "hidden": true,
-    "background": "minecraft:textures/block/sandstone.png"
+    "background": "minecraft:block/sandstone"
   },
   "criteria": {
     "always": {
