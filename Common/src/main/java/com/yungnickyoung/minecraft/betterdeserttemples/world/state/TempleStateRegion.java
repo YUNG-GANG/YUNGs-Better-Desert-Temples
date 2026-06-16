@@ -57,7 +57,7 @@ public class TempleStateRegion {
             writeRegionFile(compoundTag);
         } else if (compoundTag.contains(templePos.toString())) {
             // Entry exists in file.
-            isCleared = compoundTag.getBoolean(templePos.toString());
+            isCleared = compoundTag.getBooleanOr(templePos.toString(), false);
         } else {
             // Entry does not exist in file. Write new entry to file.
             compoundTag.putBoolean(templePos.toString(), isCleared);

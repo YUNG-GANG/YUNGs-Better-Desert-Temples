@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
@@ -19,8 +19,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces quartz pillars with an 8-high tall column of sandstone.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class QuartzPillarProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final QuartzPillarProcessor INSTANCE = new QuartzPillarProcessor();
     public static final MapCodec<QuartzPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

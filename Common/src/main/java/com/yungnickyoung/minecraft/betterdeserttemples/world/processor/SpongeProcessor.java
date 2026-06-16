@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * Replaces sponges with candles of random amount and color.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class SpongeProcessor extends StructureProcessor {
     public static final SpongeProcessor INSTANCE = new SpongeProcessor();
     public static final MapCodec<SpongeProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

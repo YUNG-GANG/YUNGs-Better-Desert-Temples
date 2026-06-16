@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -18,8 +18,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces polished diorite with sandstone or cut sandstone.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class PolishedDioriteProcessor extends StructureProcessor {
     public static final PolishedDioriteProcessor INSTANCE = new PolishedDioriteProcessor();
     public static final MapCodec<PolishedDioriteProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

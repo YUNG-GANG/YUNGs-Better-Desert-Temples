@@ -5,9 +5,11 @@ import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -15,7 +17,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+
 
 /**
  * Fills item frames with a random item.
@@ -32,48 +35,43 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
                                                                StructureTemplate.StructureEntityInfo localEntityInfo,
                                                                StructureTemplate.StructureEntityInfo globalEntityInfo,
                                                                StructurePlaceSettings structurePlaceSettings) {
-        if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
-            RandomSource randomSource = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+        if (globalEntityInfo.nbt.getStringOr("id", "").equals("minecraft:item_frame")) {
+            RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
-            // Type depends on the item currently in the frame
-            String item;
-            try {
-                item = globalEntityInfo.nbt.getCompound("Item").get("id").toString();
-            } catch (Exception e) {
-                BetterDesertTemplesCommon.LOGGER.info("Unable to randomize item frame at {}", globalEntityInfo.blockPos);
-                return globalEntityInfo;
-            }
-
-            CompoundTag newNBT = globalEntityInfo.nbt.copy();
-
-            // Required to suppress dumb log spam. Applies to all item frames.
-            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
-            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
-            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+            // Determine which pool we are grabbing from
+            String item = globalEntityInfo.nbt.getCompoundOrEmpty("Item").getStringOr("id", "");
 
             // Set the item in the item frame's NBT
-            if (item.equals("\"minecraft:iron_sword\"")) { // Armory pool
-                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(randomSource)).toString();
-                if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.getCompound("Item").putString("id", randomItemString);
-                } else {
-                    newNBT.remove("Item");
-                }
-            } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
-                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(randomSource)).toString();
-                if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.getCompound("Item").putString("id", randomItemString);
-                } else {
-                    newNBT.remove("Item");
-                }
-            } else {
-                // No match -- item frame must be for a different purpose
-                globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
-                return globalEntityInfo;
+            CompoundTag newNBT = globalEntityInfo.nbt.copy();
+            if (!newNBT.contains("Item")) {
+                newNBT.put("Item", new CompoundTag());
             }
+            var newItemNbt = newNBT.getCompound("Item").orElseThrow();
+            String randomItemString;
+            switch (item) {
+                case "minecraft:iron_sword" -> // Armory pool
+                        randomItemString = BuiltInRegistries.ITEM.getKey(
+                                ItemFrameChances.get().getArmouryItem(random)).toString();
+                case "minecraft:bread" ->      // Storage pool
+                        randomItemString = BuiltInRegistries.ITEM.getKey(
+                                ItemFrameChances.get().getStorageItem(random)).toString();
+                default -> {
+                    // No match -- item frame must be for a different purpose
+                    globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
+                    return globalEntityInfo;
+                }
+            };
+
+            if (randomItemString.equals("minecraft:air")) {
+                return null;
+            }
+            newItemNbt.putString("id", randomItemString);
+
+            // Required to suppress dumb log spam
+            newNBT.store("block_pos", BlockPos.CODEC, globalEntityInfo.blockPos);
 
             // Randomize rotation
-            int randomRotation = randomSource.nextInt(8);
+            int randomRotation = random.nextInt(8);
             newNBT.putByte("ItemRotation", (byte) randomRotation);
 
             globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
@@ -81,18 +79,17 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
         return globalEntityInfo;
     }
 
-    @Nullable
     @Override
-    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
+    public StructureTemplate.@Nullable StructureBlockInfo processBlock(LevelReader levelReader,
+                                                                       BlockPos jigsawPiecePos,
+                                                                       BlockPos jigsawPieceBottomCenterPos,
+                                                                       StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                                       StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                                       StructurePlaceSettings structurePlacementData) {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override protected StructureProcessorType<?> getType() {
         return StructureProcessorModule.ITEM_FRAME_PROCESSOR;
     }
 }

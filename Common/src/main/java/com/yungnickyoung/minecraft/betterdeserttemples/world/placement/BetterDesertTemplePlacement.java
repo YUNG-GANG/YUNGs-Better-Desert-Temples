@@ -51,7 +51,7 @@ public class BetterDesertTemplePlacement extends RandomSpreadStructurePlacement 
         RandomState randomState = chunkGeneratorStructureState.randomState();
         long seed = chunkGeneratorStructureState.getLevelSeed();
         ChunkPos chunkPos = this.getPotentialStructureChunk(seed, chunkX, chunkZ);
-        if (chunkPos.x == chunkX && chunkPos.z == chunkZ) {
+        if (chunkPos.x() == chunkX && chunkPos.z() == chunkZ) {
             BlockPos structurePos = chunkPos.getMiddleBlockPosition(120);
             boolean isOceanOrRiverNear = biomeSource.findBiomeHorizontal(
                     structurePos.getX(), structurePos.getY(), structurePos.getZ(),

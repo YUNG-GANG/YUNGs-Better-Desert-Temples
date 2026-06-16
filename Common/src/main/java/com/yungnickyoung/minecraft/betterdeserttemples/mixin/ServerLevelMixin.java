@@ -7,7 +7,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.RandomSequences;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
@@ -39,20 +38,18 @@ public abstract class ServerLevelMixin extends Level implements ITempleStateCach
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void betterdeserttemples_attachTempleStateManager(MinecraftServer minecraftServer,
-                                                              Executor executor,
-                                                              LevelStorageSource.LevelStorageAccess levelStorageAccess,
-                                                              ServerLevelData serverLevelData,
-                                                              ResourceKey<Level> resourceKey,
-                                                              LevelStem levelStem,
-                                                              ChunkProgressListener chunkProgressListener,
-                                                              boolean bl,
-                                                              long l,
-                                                              List<CustomSpawner> list,
-                                                              boolean bl2,
-                                                              RandomSequences $$11,
-                                                              CallbackInfo ci) {
-        Path dimensionPath = levelStorageAccess.getDimensionPath(this.dimension());
+    private void betterdeserttemples_attachTempleStateManager(final MinecraftServer server,
+                                                              final Executor executor,
+                                                              final LevelStorageSource.LevelStorageAccess levelStorage,
+                                                              final ServerLevelData levelData,
+                                                              final ResourceKey<Level> dimension,
+                                                              final LevelStem levelStem,
+                                                              final boolean isDebug,
+                                                              final long biomeZoomSeed,
+                                                              final List<CustomSpawner> customSpawners,
+                                                              final boolean tickTime,
+                                                              final CallbackInfo ci) {
+        Path dimensionPath = levelStorage.getDimensionPath(this.dimension());
         this.templeStateCache = new TempleStateCache(dimensionPath);
     }
 

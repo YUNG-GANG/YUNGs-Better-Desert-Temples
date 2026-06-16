@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -16,8 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces yellow concrete with yellow terracotta.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class YellowConcreteProcessor extends StructureProcessor {
     public static final YellowConcreteProcessor INSTANCE = new YellowConcreteProcessor();
     public static final MapCodec<YellowConcreteProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

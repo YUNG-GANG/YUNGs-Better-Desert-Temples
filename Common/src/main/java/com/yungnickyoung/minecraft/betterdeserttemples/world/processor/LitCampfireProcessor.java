@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -17,8 +17,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Randomly replaces torches with air.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class LitCampfireProcessor extends StructureProcessor {
     public static final LitCampfireProcessor INSTANCE = new LitCampfireProcessor();
     public static final MapCodec<LitCampfireProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

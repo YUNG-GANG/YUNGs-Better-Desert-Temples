@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,12 +23,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Replaces lime banners with a random banner.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class LimeBannerProcessor extends StructureProcessor {
     public static final LimeBannerProcessor INSTANCE = new LimeBannerProcessor();
     public static final MapCodec<LimeBannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
@@ -145,7 +146,9 @@ public class LimeBannerProcessor extends StructureProcessor {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state().getBlock() == Blocks.LIME_WALL_BANNER && (blockInfoGlobal.nbt().get("patterns") == null || blockInfoGlobal.nbt().getList("patterns", 10).isEmpty())) {
+            var globalNbt = Objects.requireNonNullElseGet(blockInfoGlobal.nbt(), CompoundTag::new);
+            if (blockInfoGlobal.state().getBlock() == Blocks.LIME_WALL_BANNER &&
+                globalNbt.getList("patterns").filter(l -> !l.isEmpty()).isEmpty()) {
                 if (randomSource.nextFloat() > 0.1f) {
                     return new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), null);
                 }

@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
@@ -19,8 +19,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces infested cracked stone bricks with silverfish spawner.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
     public static final InfestedCrackedStoneBricksProcessor INSTANCE = new InfestedCrackedStoneBricksProcessor();
     public static final MapCodec<InfestedCrackedStoneBricksProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

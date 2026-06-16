@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
-import net.minecraft.MethodsReturnNonnullByDefault;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -16,8 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Replaces red wool with TNT.
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
+
 public class RedWoolProcessor extends StructureProcessor {
     public static final RedWoolProcessor INSTANCE = new RedWoolProcessor();
     public static final MapCodec<RedWoolProcessor> CODEC = MapCodec.unit(() -> INSTANCE);

@@ -35,7 +35,7 @@ public class TempleStateCache {
     }
 
     private String getRegionKey(BlockPos templePos) {
-        ChunkPos chunkPos = new ChunkPos(templePos);
+        ChunkPos chunkPos = ChunkPos.containing(templePos);
         return "r." + chunkPos.getRegionX() + "." + chunkPos.getRegionZ() + ".temples";
     }
 
