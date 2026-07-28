@@ -1,7 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
 
 import net.minecraft.core.BlockPos;
@@ -10,7 +9,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -20,7 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class PolishedDioriteProcessor extends StructureProcessor {
+public class PolishedDioriteProcessor implements StructureProcessor {
     public static final PolishedDioriteProcessor INSTANCE = new PolishedDioriteProcessor();
     public static final MapCodec<PolishedDioriteProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -29,19 +27,20 @@ public class PolishedDioriteProcessor extends StructureProcessor {
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.POLISHED_DIORITE) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), SELECTOR.get(randomSource), blockInfoGlobal.nbt());
+                                                              BlockPos jigsawPiecePos,
+                                                              BlockPos jigsawPieceBottomCenterPos,
+                                                              BlockPos blockPos,
+                                                              StructureTemplate.StructureBlockInfo blockInfo,
+                                                              StructurePlaceSettings structurePlacementData) {
+        if (blockInfo.state().getBlock() == Blocks.POLISHED_DIORITE) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), SELECTOR.get(randomSource), blockInfo.nbt());
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.POLISHED_DIORITE_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }
