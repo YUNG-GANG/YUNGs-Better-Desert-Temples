@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class AcaciaWoodProcessor extends StructureProcessor {
+public class AcaciaWoodProcessor implements StructureProcessor {
     public static final AcaciaWoodProcessor INSTANCE = new AcaciaWoodProcessor();
     public static final MapCodec<AcaciaWoodProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -60,7 +59,7 @@ public class AcaciaWoodProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.ACACIA_WOOD) {
@@ -76,7 +75,7 @@ public class AcaciaWoodProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.ACACIA_WOOD_PROCESSOR;
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -18,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class TorchProcessor extends StructureProcessor {
+public class TorchProcessor implements StructureProcessor {
     public static final TorchProcessor INSTANCE = new TorchProcessor();
     public static final MapCodec<TorchProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -26,7 +25,7 @@ public class TorchProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.TORCH || blockInfoGlobal.state().getBlock() == Blocks.WALL_TORCH) {
@@ -37,7 +36,7 @@ public class TorchProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.TORCH_PROCESSOR;
     }
 }
