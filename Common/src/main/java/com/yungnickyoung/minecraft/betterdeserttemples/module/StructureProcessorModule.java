@@ -3,6 +3,9 @@ package com.yungnickyoung.minecraft.betterdeserttemples.module;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
 import com.yungnickyoung.minecraft.betterdeserttemples.services.Services;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.*;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.entity.ArmorStandStructureEntityProcessor;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.entity.ItemFrameStructureEntityProcessor;
+import com.yungnickyoung.minecraft.betterdeserttemples.world.processor.entity.PharoahStructureEntityProcessor;
 import com.yungnickyoung.minecraft.yungsapi.api.autoregister.AutoRegister;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
@@ -78,11 +81,11 @@ public class StructureProcessorModule {
     public static StructureProcessorType<PotProcessor> POT_PROCESSOR = () -> PotProcessor.CODEC;
 
     @AutoRegister("armor_stand_processor")
-    public static StructureProcessorType<?> ARMOR_STAND_PROCESSOR = () -> Services.PROCESSORS.armorStandProcessorCodec();
+    public static StructureProcessorType<?> ARMOR_STAND_PROCESSOR = ArmorStandStructureEntityProcessor.create();
 
     @AutoRegister("item_frame_processor")
-    public static StructureProcessorType<?> ITEM_FRAME_PROCESSOR = () -> Services.PROCESSORS.itemFrameProcessorCodec();
+    public static StructureProcessorType<?> ITEM_FRAME_PROCESSOR = ItemFrameStructureEntityProcessor.create();
 
     @AutoRegister("pharaoh_processor")
-    public static StructureProcessorType<?> PHARAOH_PROCESSOR = () -> Services.PROCESSORS.pharaohProcessorCodec();
+    public static StructureProcessorType<?> PHARAOH_PROCESSOR = PharoahStructureEntityProcessor.create();
 }

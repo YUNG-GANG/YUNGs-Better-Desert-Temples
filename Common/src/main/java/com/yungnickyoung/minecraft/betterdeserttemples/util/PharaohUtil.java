@@ -57,7 +57,7 @@ public class PharaohUtil {
         return isPharoahHead(helmetItemStack);
     }
 
-    private static boolean isPharoahHead(final ItemStack helmetItemStack) {
+    public static boolean isPharoahHead(final ItemStack helmetItemStack) {
         ResolvableProfile profile = helmetItemStack.get(DataComponents.PROFILE);
         return profile != null && profile.partialProfile().properties().values().stream()
                 .filter(property -> property.name().equals("textures"))
