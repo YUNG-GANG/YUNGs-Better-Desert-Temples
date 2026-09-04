@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class YellowStainedGlassProcessor extends StructureProcessor {
+public class YellowStainedGlassProcessor implements StructureProcessor {
     public static final YellowStainedGlassProcessor INSTANCE = new YellowStainedGlassProcessor();
     public static final MapCodec<YellowStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -30,10 +29,10 @@ public class YellowStainedGlassProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_STAINED_GLASS) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.STAINED_GLASS.yellow()) {
             if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
                 return blockInfoGlobal;
             }
@@ -53,7 +52,7 @@ public class YellowStainedGlassProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.YELLOW_STAINED_GLASS_PROCESSOR;
     }
 }

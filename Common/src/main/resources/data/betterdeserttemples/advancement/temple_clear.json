@@ -27,7 +27,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:husk",
+              "minecraft:entity_type": "minecraft:husk",
               "equipment": {
                 "head": {
                   "components": {

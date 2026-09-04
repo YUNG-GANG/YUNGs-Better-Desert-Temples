@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class QuartzPillarProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class QuartzPillarProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final QuartzPillarProcessor INSTANCE = new QuartzPillarProcessor();
     public static final MapCodec<QuartzPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -29,7 +28,7 @@ public class QuartzPillarProcessor extends StructureProcessor implements ISafeWo
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.QUARTZ_PILLAR) {
@@ -44,7 +43,7 @@ public class QuartzPillarProcessor extends StructureProcessor implements ISafeWo
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.QUARTZ_PILLAR_PROCESSOR;
     }
 }
