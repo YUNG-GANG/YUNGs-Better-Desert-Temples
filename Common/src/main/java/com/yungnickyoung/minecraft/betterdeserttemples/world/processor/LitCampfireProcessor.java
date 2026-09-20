@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -19,7 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class LitCampfireProcessor extends StructureProcessor {
+public class LitCampfireProcessor implements StructureProcessor {
     public static final LitCampfireProcessor INSTANCE = new LitCampfireProcessor();
     public static final MapCodec<LitCampfireProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -27,7 +26,7 @@ public class LitCampfireProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.CAMPFIRE && blockInfoGlobal.state().getValue(CampfireBlock.LIT)) {
@@ -38,7 +37,7 @@ public class LitCampfireProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.LIT_CAMPFIRE_PROCESSOR;
     }
 }

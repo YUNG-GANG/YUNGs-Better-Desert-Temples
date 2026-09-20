@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -20,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class EndStoneBrickWallProcessor extends StructureProcessor {
+public class EndStoneBrickWallProcessor implements StructureProcessor {
     public static final EndStoneBrickWallProcessor INSTANCE = new EndStoneBrickWallProcessor();
     public static final MapCodec<EndStoneBrickWallProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -28,7 +27,7 @@ public class EndStoneBrickWallProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.END_STONE_BRICK_WALL) {
@@ -44,7 +43,7 @@ public class EndStoneBrickWallProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.END_STONE_BRICK_WALL_PROCESSOR;
     }
 }

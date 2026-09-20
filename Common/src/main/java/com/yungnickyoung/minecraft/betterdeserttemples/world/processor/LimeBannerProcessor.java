@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -30,12 +29,12 @@ import java.util.Objects;
  */
 
 
-public class LimeBannerProcessor extends StructureProcessor {
+public class LimeBannerProcessor implements StructureProcessor {
     public static final LimeBannerProcessor INSTANCE = new LimeBannerProcessor();
     public static final MapCodec<LimeBannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     public static final Banner ANKH_BANNER_0 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.yellow().defaultBlockState())
             .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
@@ -45,7 +44,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_1 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.yellow().defaultBlockState())
             .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.SKULL, DyeColor.BLACK)
@@ -57,7 +56,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_2 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.black().defaultBlockState())
             .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
             .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
@@ -68,7 +67,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_3 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.black().defaultBlockState())
             .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
@@ -78,7 +77,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_4 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.black().defaultBlockState())
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
             .pattern(BannerPatterns.TRIANGLE_TOP, DyeColor.YELLOW)
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
@@ -88,7 +87,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner CAT_BANNER = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.yellow().defaultBlockState())
             .pattern(BannerPatterns.BRICKS, DyeColor.BLACK)
             .pattern(BannerPatterns.HALF_HORIZONTAL_MIRROR, DyeColor.YELLOW)
             .pattern(BannerPatterns.DIAGONAL_RIGHT, DyeColor.YELLOW)
@@ -102,7 +101,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_0 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.yellow().defaultBlockState())
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
             .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
@@ -110,7 +109,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_0_BLUE = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.yellow().defaultBlockState())
             .pattern(BannerPatterns.TRIANGLE_BOTTOM, DyeColor.BLUE)
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLUE)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLUE)
@@ -118,7 +117,7 @@ public class LimeBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_1 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.black().defaultBlockState())
             .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.YELLOW)
             .pattern(BannerPatterns.FLOWER, DyeColor.BLACK)
             .build();
@@ -139,7 +138,7 @@ public class LimeBannerProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() instanceof AbstractBannerBlock) {
@@ -147,7 +146,7 @@ public class LimeBannerProcessor extends StructureProcessor {
 
             // Make sure we only operate on the placeholder banners
             var globalNbt = Objects.requireNonNullElseGet(blockInfoGlobal.nbt(), CompoundTag::new);
-            if (blockInfoGlobal.state().getBlock() == Blocks.LIME_WALL_BANNER &&
+            if (blockInfoGlobal.state().getBlock() == Blocks.WALL_BANNER.lime() &&
                 globalNbt.getList("patterns").filter(l -> !l.isEmpty()).isEmpty()) {
                 if (randomSource.nextFloat() > 0.1f) {
                     return new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), null);
@@ -174,7 +173,7 @@ public class LimeBannerProcessor extends StructureProcessor {
         return nbt;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.LIME_BANNER_PROCESSOR;
     }
 }
