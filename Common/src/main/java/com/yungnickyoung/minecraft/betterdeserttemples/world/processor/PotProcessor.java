@@ -1,7 +1,6 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,33 +20,34 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class PotProcessor extends StructureProcessor {
+public class PotProcessor implements StructureProcessor {
     public static final PotProcessor INSTANCE = new PotProcessor();
     public static final MapCodec<PotProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.DECORATED_POT) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+                                                              BlockPos jigsawPiecePos,
+                                                              BlockPos jigsawPieceBottomCenterPos,
+                                                              BlockPos blockPos,
+                                                              StructureTemplate.StructureBlockInfo blockInfo,
+                                                              StructurePlaceSettings structurePlacementData) {
+        if (blockInfo.state().getBlock() == Blocks.DECORATED_POT) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
 
-            CompoundTag newNBT = blockInfoGlobal.nbt() == null ? new CompoundTag() : blockInfoGlobal.nbt();
+            CompoundTag newNBT = blockInfo.nbt() == null ? new CompoundTag() : blockInfo.nbt();
             ListTag sherds = new ListTag();
             for (int i = 0; i < 4; i++) {
                 sherds.add(StringTag.valueOf(getRandomSherd(randomSource)));
             }
             newNBT.put("sherds", sherds);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.DECORATED_POT.defaultBlockState(), newNBT);
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), Blocks.DECORATED_POT.defaultBlockState(), newNBT);
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.POT_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 
     private String getRandomSherd(RandomSource random) {

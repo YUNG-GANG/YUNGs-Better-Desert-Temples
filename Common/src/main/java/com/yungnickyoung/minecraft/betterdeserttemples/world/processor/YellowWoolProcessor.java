@@ -1,19 +1,20 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
 
 import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -23,20 +24,20 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class YellowWoolProcessor extends StructureProcessor {
+public class YellowWoolProcessor implements StructureProcessor {
     public static final YellowWoolProcessor INSTANCE = new YellowWoolProcessor();
     public static final MapCodec<YellowWoolProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_WOOL) {
+                                                              BlockPos jigsawPiecePos,
+                                                              BlockPos jigsawPieceBottomCenterPos,
+                                                              BlockPos blockPos,
+                                                              StructureTemplate.StructureBlockInfo blockInfo,
+                                                              StructurePlaceSettings structurePlacementData) {
+        if (blockInfo.state().getBlock() == Blocks.WOOL.pick(DyeColor.YELLOW)) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
-                    .setEntityType(EntityType.HUSK)
+                    .setEntityType(BuiltInRegistries.ENTITY_TYPE.get(Identifier.fromNamespaceAndPath("minecraft", "husk")).orElseThrow().value())
                     .maxNearbyEntities(8)
                     .requiredPlayerRange(24)
                     .build();
@@ -103,12 +104,13 @@ public class YellowWoolProcessor extends StructureProcessor {
                 }));
             }));
             CompoundTag nbt = spawnerData.save();
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.YELLOW_WOOL_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }

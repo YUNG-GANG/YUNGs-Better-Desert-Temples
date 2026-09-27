@@ -2,7 +2,6 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdeserttemples.BetterDesertTemplesCommon;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.betterdeserttemples.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.util.Util;
@@ -15,7 +14,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jspecify.annotations.Nullable;
 
@@ -81,15 +80,16 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
 
     @Override
     public StructureTemplate.@Nullable StructureBlockInfo processBlock(LevelReader levelReader,
-                                                                       BlockPos jigsawPiecePos,
-                                                                       BlockPos jigsawPieceBottomCenterPos,
-                                                                       StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                                       StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                                       StructurePlaceSettings structurePlacementData) {
-        return blockInfoGlobal;
+                                                                        BlockPos jigsawPiecePos,
+                                                                        BlockPos jigsawPieceBottomCenterPos,
+                                                                        BlockPos blockPos,
+                                                                        StructureTemplate.StructureBlockInfo blockInfo,
+                                                                        StructurePlaceSettings structurePlacementData) {
+        return blockInfo;
     }
 
-    @Override protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.ITEM_FRAME_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }

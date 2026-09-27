@@ -1,18 +1,17 @@
 package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,24 +21,24 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class YellowStainedGlassProcessor extends StructureProcessor {
+public class YellowStainedGlassProcessor implements StructureProcessor {
     public static final YellowStainedGlassProcessor INSTANCE = new YellowStainedGlassProcessor();
     public static final MapCodec<YellowStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.YELLOW_STAINED_GLASS) {
-            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
-                return blockInfoGlobal;
+                                                              BlockPos jigsawPiecePos,
+                                                              BlockPos jigsawPieceBottomCenterPos,
+                                                              BlockPos blockPos,
+                                                              StructureTemplate.StructureBlockInfo blockInfo,
+                                                              StructurePlaceSettings structurePlacementData) {
+        if (blockInfo.state().getBlock() == Blocks.STAINED_GLASS.pick(DyeColor.YELLOW)) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfo.pos()))) {
+                return blockInfo;
             }
 
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SANDSTONE.defaultBlockState(), blockInfoGlobal.nbt());
-            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable().move(Direction.DOWN);
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), Blocks.SANDSTONE.defaultBlockState(), blockInfo.nbt());
+            BlockPos.MutableBlockPos mutable = blockInfo.pos().mutable().move(Direction.DOWN);
             BlockState currBlockState = levelReader.getBlockState(mutable);
 
             while (mutable.getY() > levelReader.getMinY()
@@ -50,10 +49,11 @@ public class YellowStainedGlassProcessor extends StructureProcessor {
                 currBlockState = levelReader.getBlockState(mutable);
             }
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.YELLOW_STAINED_GLASS_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }

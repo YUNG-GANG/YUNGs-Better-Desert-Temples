@@ -2,7 +2,6 @@ package com.yungnickyoung.minecraft.betterdeserttemples.world.processor;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessorModule;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
 
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -30,12 +28,12 @@ import java.util.Objects;
  */
 
 
-public class RedBannerProcessor extends StructureProcessor {
+public class RedBannerProcessor implements StructureProcessor {
     public static final RedBannerProcessor INSTANCE = new RedBannerProcessor();
     public static final MapCodec<RedBannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     public static final Banner ANKH_BANNER_0 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.SKULL, DyeColor.YELLOW)
@@ -45,7 +43,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_1 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.SKULL, DyeColor.BLACK)
@@ -57,7 +55,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_2 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.BLACK).defaultBlockState())
             .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
             .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.BLACK)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
@@ -68,7 +66,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_3 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.BLACK).defaultBlockState())
             .pattern(BannerPatterns.FLOWER, DyeColor.YELLOW)
             .pattern(BannerPatterns.STRAIGHT_CROSS, DyeColor.YELLOW)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
@@ -78,7 +76,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner ANKH_BANNER_4 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.BLACK).defaultBlockState())
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
             .pattern(BannerPatterns.TRIANGLE_TOP, DyeColor.YELLOW)
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
@@ -88,7 +86,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner CAT_BANNER = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.BRICKS, DyeColor.BLACK)
             .pattern(BannerPatterns.HALF_HORIZONTAL_MIRROR, DyeColor.YELLOW)
             .pattern(BannerPatterns.DIAGONAL_RIGHT, DyeColor.YELLOW)
@@ -102,7 +100,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_0 = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLACK)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
             .pattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
@@ -110,7 +108,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_0_BLUE = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.TRIANGLE_BOTTOM, DyeColor.BLUE)
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.BLUE)
             .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLUE)
@@ -118,13 +116,13 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner EMBLEM_BANNER_1 = new Banner.Builder()
-            .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.BLACK).defaultBlockState())
             .pattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.YELLOW)
             .pattern(BannerPatterns.FLOWER, DyeColor.BLACK)
             .build();
 
     public static final Banner PYRAMID_BANNER = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.BRICKS, DyeColor.WHITE)
             .pattern(BannerPatterns.BRICKS, DyeColor.YELLOW)
             .pattern(BannerPatterns.DIAGONAL_LEFT, DyeColor.LIGHT_BLUE)
@@ -133,7 +131,7 @@ public class RedBannerProcessor extends StructureProcessor {
             .build();
 
     public static final Banner SPHINX_BANNER = new Banner.Builder()
-            .blockState(Blocks.YELLOW_WALL_BANNER.defaultBlockState())
+            .blockState(Blocks.WALL_BANNER.pick(DyeColor.YELLOW).defaultBlockState())
             .pattern(BannerPatterns.HALF_HORIZONTAL, DyeColor.YELLOW)
             .pattern(BannerPatterns.SQUARE_TOP_LEFT, DyeColor.LIGHT_BLUE)
             .pattern(BannerPatterns.CURLY_BORDER, DyeColor.LIGHT_BLUE)
@@ -158,27 +156,27 @@ public class RedBannerProcessor extends StructureProcessor {
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() instanceof AbstractBannerBlock) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+                                                              BlockPos jigsawPiecePos,
+                                                              BlockPos jigsawPieceBottomCenterPos,
+                                                              BlockPos blockPos,
+                                                              StructureTemplate.StructureBlockInfo blockInfo,
+                                                              StructurePlaceSettings structurePlacementData) {
+        if (blockInfo.state().getBlock() instanceof AbstractBannerBlock) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
 
             // Make sure we only operate on the placeholder banners
-            var globalNbt = Objects.requireNonNullElseGet(blockInfoGlobal.nbt(), CompoundTag::new);
-            if (blockInfoGlobal.state().getBlock() == Blocks.RED_WALL_BANNER &&
+            var globalNbt = Objects.requireNonNullElseGet(blockInfo.nbt(), CompoundTag::new);
+            if (blockInfo.state().getBlock() == Blocks.WALL_BANNER.pick(DyeColor.RED) &&
                 globalNbt.getList("patterns").filter(l -> !l.isEmpty()).isEmpty()) {
                 Banner banner = getRandomBanner(randomSource);
-                Direction facing = blockInfoGlobal.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
+                Direction facing = blockInfo.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
                 CompoundTag newNBT = copyNBT(banner.getNbt());
 
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), newState, newNBT);
+                blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), newState, newNBT);
             }
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
     private Banner getRandomBanner(RandomSource randomSource) {
@@ -191,7 +189,8 @@ public class RedBannerProcessor extends StructureProcessor {
         return nbt;
     }
 
-    protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.RED_BANNER_PROCESSOR;
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }
