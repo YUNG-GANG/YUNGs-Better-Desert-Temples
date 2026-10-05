@@ -5,6 +5,7 @@ import com.yungnickyoung.minecraft.betterdeserttemples.module.StructureProcessor
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StairBlock;
@@ -13,13 +14,12 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 /**
  * Replaces red stained-glass with sandstone, sandstone stairs.
  */
-public class RedStainedGlassProcessor extends StructureProcessor {
+public class RedStainedGlassProcessor implements StructureProcessor {
     public static final RedStainedGlassProcessor INSTANCE = new RedStainedGlassProcessor();
     public static final MapCodec<RedStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -27,10 +27,10 @@ public class RedStainedGlassProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.RED_STAINED_GLASS) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.STAINED_GLASS.pick(DyeColor.RED)) {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             float f = randomSource.nextFloat();
 
@@ -49,7 +49,7 @@ public class RedStainedGlassProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.RED_STAINED_GLASS_PROCESSOR;
     }
 }

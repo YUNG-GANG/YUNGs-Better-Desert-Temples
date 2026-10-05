@@ -7,11 +7,11 @@ import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
+public class InfestedCrackedStoneBricksProcessor implements StructureProcessor {
     public static final InfestedCrackedStoneBricksProcessor INSTANCE = new InfestedCrackedStoneBricksProcessor();
     public static final MapCodec<InfestedCrackedStoneBricksProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -29,12 +29,12 @@ public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.INFESTED_CRACKED_STONE_BRICKS) {
             MobSpawnerData spawnerData = MobSpawnerData.builder()
-                    .setEntityType(EntityType.SILVERFISH)
+                    .setEntityType(EntityTypes.SILVERFISH)
                     .requiredPlayerRange(24)
                     .build();
             CompoundTag nbt = spawnerData.save();
@@ -43,7 +43,7 @@ public class InfestedCrackedStoneBricksProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.INFESTED_CRACKED_STONE_BRICKS_PROCESSOR;
     }
 }

@@ -6,11 +6,11 @@ import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandom
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -20,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class WhiteStainedGlassProcessor extends StructureProcessor {
+public class WhiteStainedGlassProcessor implements StructureProcessor {
     public static final WhiteStainedGlassProcessor INSTANCE = new WhiteStainedGlassProcessor();
     public static final MapCodec<WhiteStainedGlassProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -31,17 +31,17 @@ public class WhiteStainedGlassProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.WHITE_STAINED_GLASS) {
+        if (blockInfoGlobal.state().getBlock() == Blocks.STAINED_GLASS.pick(DyeColor.WHITE)) {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), SELECTOR.get(randomSource), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.WHITE_STAINED_GLASS_PROCESSOR;
     }
 }

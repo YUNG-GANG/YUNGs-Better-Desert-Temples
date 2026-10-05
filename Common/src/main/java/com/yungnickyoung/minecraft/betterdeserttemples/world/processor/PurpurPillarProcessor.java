@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -23,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 
-public class PurpurPillarProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class PurpurPillarProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final PurpurPillarProcessor INSTANCE = new PurpurPillarProcessor();
     public static final MapCodec<PurpurPillarProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -31,7 +30,7 @@ public class PurpurPillarProcessor extends StructureProcessor implements ISafeWo
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() == Blocks.PURPUR_PILLAR) {
@@ -52,7 +51,7 @@ public class PurpurPillarProcessor extends StructureProcessor implements ISafeWo
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorModule.PURPUR_PILLAR_PROCESSOR;
     }
 }
